@@ -14,7 +14,7 @@ struct FillupsView: View {
     
     var body: some View {
         List(car.fillups){fillup in
-            NavigationLink(destination: Text("Destination")){
+            NavigationLink(destination: FillupView()){
                 Text("\(fillup.odometer)")
             }
         }
