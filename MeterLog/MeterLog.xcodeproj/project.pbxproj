@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CF225E03A0E00B3C5A8 /* CarManager.swift */; };
+		2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */; };
 		2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59925E03867005E700D /* MeterLogApp.swift */; };
 		2FA0B59E25E0386A005E700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B59D25E0386A005E700D /* Assets.xcassets */; };
 		2FA0B5A125E0386A005E700D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B5A025E0386A005E700D /* Preview Assets.xcassets */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F822CF225E03A0E00B3C5A8 /* CarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
+		2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillupsView.swift; sourceTree = "<group>"; };
 		2FA0B59625E03867005E700D /* MeterLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeterLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA0B59925E03867005E700D /* MeterLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterLogApp.swift; sourceTree = "<group>"; };
 		2FA0B59B25E03867005E700D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +76,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F822CF125E039E900B3C5A8 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				2F822CF225E03A0E00B3C5A8 /* CarManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		2F822CFA25E03F4C00B3C5A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2F822CFB25E03F5800B3C5A8 /* Screens */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2F822CFB25E03F5800B3C5A8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				2FA0B59B25E03867005E700D /* ContentView.swift */,
+				2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		2FA0B58D25E03867005E700D = {
 			isa = PBXGroup;
 			children = (
@@ -95,8 +124,9 @@
 		2FA0B59825E03867005E700D /* MeterLog */ = {
 			isa = PBXGroup;
 			children = (
+				2F822CFA25E03F4C00B3C5A8 /* Views */,
+				2F822CF125E039E900B3C5A8 /* Managers */,
 				2FA0B59925E03867005E700D /* MeterLogApp.swift */,
-				2FA0B59B25E03867005E700D /* ContentView.swift */,
 				2FA0B59D25E0386A005E700D /* Assets.xcassets */,
 				2FA0B5A225E0386A005E700D /* Info.plist */,
 				2FA0B59F25E0386A005E700D /* Preview Content */,
@@ -260,6 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA0B5CA25E0391B005E700D /* ContentView.swift in Sources */,
+				2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */,
+				2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */,
 				2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

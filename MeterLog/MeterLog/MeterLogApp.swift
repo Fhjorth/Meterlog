@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MeterLogApp: App {
+    let carManager = CarManager.carManagerForTest
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(carManager)
         }
     }
 }
