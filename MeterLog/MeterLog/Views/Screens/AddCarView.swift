@@ -1,5 +1,5 @@
 //
-//  GraphView.swift
+//  AddCarView.swift
 //  MeterLog
 //
 //  Created by Frederik Hjorth on 19/02/2021.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct GraphView: View {
+struct AddCarView: View {
     var body: some View {
-        Text("This i graph")
+        Text("This is a car")
     }
 }
 
-struct GraphView_Previews: PreviewProvider {
+struct AddCarView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphView()
+        AddCarView()
     }
 }

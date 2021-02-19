@@ -9,9 +9,15 @@ import SwiftUI
 
 struct CarDetailView: View {
     @State
-    private var shownSegment: Int = 1
+    private var shownSegment: Int = 2
+    @State
+    private var editingCar = false
+    @State
+    private var addingFillup = false
+    
     
     var car: Car
+    
     
     var body: some View {
         VStack{
@@ -21,8 +27,10 @@ struct CarDetailView: View {
                 }
                 else{
                     GraphView()
+                        
                 }
             }
+            .frame(maxHeight: .infinity)
             
             Picker(selection: $shownSegment, label: Text("Picker"), content: {
                 Text("1").tag(1)
@@ -30,11 +38,36 @@ struct CarDetailView: View {
             })
             .pickerStyle(SegmentedPickerStyle())
         }
+        .navigationBarTitle(car.name)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(trailing: HStack{
+            Button(action: {
+                editingCar.toggle()
+            }, label: {
+                Image(systemName: "gearshape")
+                
+            })
+            .sheet(isPresented: $editingCar, content: {
+                AddCarView()
+            })
+            
+            Button(action: {
+                addingFillup.toggle()
+            }, label: {
+                Image(systemName: "plus")
+            })
+            .sheet(isPresented: $addingFillup, content: {
+                FillupView()
+            })
+        })
     }
 }
 
 struct CarDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CarDetailView(car: Car.carForTest)
+        NavigationView{
+            CarDetailView(car: Car.carForTest)
+        }
+        
     }
 }

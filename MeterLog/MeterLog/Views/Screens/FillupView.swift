@@ -1,5 +1,5 @@
 //
-//  GraphView.swift
+//  FillupView.swift
 //  MeterLog
 //
 //  Created by Frederik Hjorth on 19/02/2021.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct GraphView: View {
+struct FillupView: View {
     var body: some View {
-        Text("This i graph")
+        Text("This is fillup")
     }
 }
 
-struct GraphView_Previews: PreviewProvider {
+struct FillupView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphView()
+        FillupView()
     }
 }
