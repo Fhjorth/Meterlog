@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59925E03867005E700D /* MeterLogApp.swift */; };
-		2FA0B59C25E03867005E700D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59B25E03867005E700D /* ContentView.swift */; };
 		2FA0B59E25E0386A005E700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B59D25E0386A005E700D /* Assets.xcassets */; };
 		2FA0B5A125E0386A005E700D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B5A025E0386A005E700D /* Preview Assets.xcassets */; };
 		2FA0B5AC25E0386A005E700D /* MeterLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B5AB25E0386A005E700D /* MeterLogTests.swift */; };
 		2FA0B5B725E0386A005E700D /* MeterLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B5B625E0386A005E700D /* MeterLogUITests.swift */; };
+		2FA0B5CA25E0391B005E700D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59B25E03867005E700D /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,7 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FA0B59C25E03867005E700D /* ContentView.swift in Sources */,
+				2FA0B5CA25E0391B005E700D /* ContentView.swift in Sources */,
 				2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
