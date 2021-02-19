@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(carManager.cars){car in
-                NavigationLink(destination: FillupsView(car: car)){
+                NavigationLink(destination: CarDetailView(car: car)){
                     Text(car.name)
                 }
             }

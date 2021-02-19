@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CF225E03A0E00B3C5A8 /* CarManager.swift */; };
 		2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */; };
+		2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0425E0455400B3C5A8 /* CarDetailView.swift */; };
 		2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59925E03867005E700D /* MeterLogApp.swift */; };
 		2FA0B59E25E0386A005E700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B59D25E0386A005E700D /* Assets.xcassets */; };
 		2FA0B5A125E0386A005E700D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B5A025E0386A005E700D /* Preview Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		2F822CF225E03A0E00B3C5A8 /* CarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
 		2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillupsView.swift; sourceTree = "<group>"; };
+		2F822D0425E0455400B3C5A8 /* CarDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailView.swift; sourceTree = "<group>"; };
 		2FA0B59625E03867005E700D /* MeterLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeterLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA0B59925E03867005E700D /* MeterLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterLogApp.swift; sourceTree = "<group>"; };
 		2FA0B59B25E03867005E700D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			children = (
 				2FA0B59B25E03867005E700D /* ContentView.swift */,
 				2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */,
+				2F822D0425E0455400B3C5A8 /* CarDetailView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				2FA0B5CA25E0391B005E700D /* ContentView.swift in Sources */,
 				2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */,
 				2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */,
+				2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */,
 				2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
