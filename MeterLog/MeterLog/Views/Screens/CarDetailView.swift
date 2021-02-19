@@ -20,8 +20,7 @@ struct CarDetailView: View {
                     FillupsView(car: car)
                 }
                 else{
-                    Rectangle()
-                        .fill(Color.green)
+                    GraphView()
                 }
             }
             
