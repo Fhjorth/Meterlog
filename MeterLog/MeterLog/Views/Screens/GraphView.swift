@@ -14,7 +14,6 @@ struct GraphView: View {
     var body: some View {
         VStack {
             GraphContainer()
-                .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 300)
         }
     }
 }
