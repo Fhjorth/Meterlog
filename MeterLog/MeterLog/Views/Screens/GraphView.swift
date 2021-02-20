@@ -9,17 +9,34 @@ import SwiftUI
 
 struct GraphView: View {
     
-    //var car: Car
+    var car: Car
     
     var body: some View {
         VStack {
-            GraphContainer()
+            GraphContainer(car: Car.carForTest)
+                .frame(height: 400)
+            
+            Spacer()
+            
+            VStack{
+                List{
+                    Text(car.name)
+                    Text("\(car.fillups.count)")
+                    Text("Hej")
+                }
+            }
         }
     }
 }
 
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
-        GraphView()
+        NavigationView {
+            VStack{
+                ZStack{
+                    GraphView(car: Car.carForTest)
+                }
+            }
+        }
     }
 }

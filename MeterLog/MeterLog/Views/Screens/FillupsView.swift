@@ -10,11 +10,11 @@ import SwiftUI
 struct FillupsView: View {
     
     
-    var car: Car
+    @ObservedObject var car: Car
     
     var body: some View {
-        List(car.fillups){fillup in
-            NavigationLink(destination: FillupView()){
+        List(car.fillups){ fillup in
+            NavigationLink(destination: FillupView(car: car, fillupId: fillup.id)){
                 Text("\(fillup.odometer)")
             }
         }

@@ -14,6 +14,12 @@ struct Fillup: Identifiable {
     var odometer: Int
     var volume: Float
     var literPrice: Float
+    
+    static func createFrom(date: Date, odometer: Int, volume: Float, price: Float, id: UUID? = nil) -> Fillup {
+        let id = id ?? UUID()
+        
+        return Fillup(id: id, date: date, odometer: odometer, volume: volume, literPrice: price)
+    }
 }
 
 class Car: ObservableObject, Identifiable {
@@ -27,6 +33,32 @@ class Car: ObservableObject, Identifiable {
     
     @Published
     var fillups = [Fillup]()
+    
+    func addNewFillup(_ fillup: Fillup){
+        fillups.append(fillup)
+
+        // TODO store in cloud
+    }
+    
+    func updateFillup(_ fillup: Fillup){
+        guard let index = fillups.firstIndex(where: { f in f.id == fillup.id }) else {
+            
+            print(fillup.id)
+            print("======")
+            print(fillups.map { f in "\(f.id)"}.joined(separator: "\n"))
+            
+            return
+        }
+        
+        objectWillChange.send()
+        
+        fillups.remove(at: index)
+        fillups.insert(fillup, at: index)
+        
+        objectWillChange.send()
+        
+        // TODO update in cloud
+    }
     
     static var carForTest: Car = {
         let formatter = DateFormatter()

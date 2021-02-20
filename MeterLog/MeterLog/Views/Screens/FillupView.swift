@@ -21,6 +21,7 @@ struct MyInput : View {
     
     var nextText: String?
     var nextAction: () -> () = { }
+    @Binding var nextActionEnabled: Bool
     
     var isDate = false
     
@@ -45,7 +46,8 @@ struct MyInput : View {
                             tag: tag,
                             validator: validator,
                             nextText: nextText,
-                            nextAction: nextAction)
+                            nextAction: nextAction,
+                            nextActionEnabled: $nextActionEnabled)
                     }
                     
                     Rectangle()
@@ -66,7 +68,20 @@ struct MyInput : View {
 }
 
 struct FillupView: View {
-    @ObservedObject var fillup = TempFillup()
+    @Environment(\.presentationMode) var presentationMode
+    
+    init(car: Car) {
+        self.car = car
+        fillup = TempFillup(car: car)
+    }
+    
+    init(car: Car, fillupId: UUID) {
+        self.car = car
+        fillup = TempFillup(car: car, fillupId: fillupId)
+    }
+    
+    var car: Car
+    @ObservedObject var fillup: TempFillup
     
     @State private var selection: Int? = 2
     
@@ -74,9 +89,11 @@ struct FillupView: View {
     let floatValidator: (String) -> String = { text in text.filter { c in c.isNumber || c == "." } }
     
     private func next() { selection = (selection ?? 0) + 1 }
+    
     private func save() {
         selection = nil
-        print("Saving the things!")
+        fillup.save()
+        presentationMode.wrappedValue.dismiss()
     }
     
     var body: some View {
@@ -100,6 +117,7 @@ struct FillupView: View {
                     tag: 1,
                     nextText: "Next",
                     nextAction: next,
+                    nextActionEnabled: .constant(true),
                     isDate: true)
                 
                 MyInput(
@@ -111,7 +129,8 @@ struct FillupView: View {
                     tag: 2,
                     validator: intValidator,
                     nextText: "Next",
-                    nextAction: next)
+                    nextAction: next,
+                    nextActionEnabled: .constant(true))
                 
                 MyInput(
                     title: "Volume",
@@ -122,7 +141,8 @@ struct FillupView: View {
                     tag: 3,
                     validator: floatValidator,
                     nextText: "Next",
-                    nextAction: next)
+                    nextAction: next,
+                    nextActionEnabled: .constant(true))
                 
                 MyInput(
                     title: "Price",
@@ -133,18 +153,20 @@ struct FillupView: View {
                     tag: 4,
                     validator: floatValidator,
                     nextText: "Save",
-                    nextAction: save)
+                    nextAction: save,
+                    nextActionEnabled: $fillup.isValid)
                 
                 HStack{
                     Spacer()
                     
-                    Button(action: {}) {
+                    Button(action: save) {
                         Text("Save")
                     }
+                    .disabled(fillup.isValid == false)
                     .padding(8)
                     .frame(minWidth: 100)
                     .foregroundColor(.white)
-                    .background(Color.blue)
+                    .background(fillup.isValid ? Color.blue : Color.blue.opacity(0.5))
                     .cornerRadius(8)
                 }
             }.padding()
@@ -155,7 +177,7 @@ struct FillupView: View {
 struct FillupView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FillupView()
+            FillupView(car: Car.carForTest)
         }
     }
 }

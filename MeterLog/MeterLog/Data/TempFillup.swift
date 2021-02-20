@@ -10,54 +10,75 @@ import Foundation
 
 class TempFillup: ObservableObject {
     
-    private var id: UUID
+    private let id: UUID
+    private let isEditing: Bool
 
-    let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
        let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM-yyyy HH:mm"
         return formatter
     }()
     
-    init(){
+    init(car: Car){
+        self.car = car
         id = UUID()
         date = dateFormatter.string(from: Date())
+        isEditing = false
     }
     
-    @Published var date: String
-    @Published var odometer: String = ""
-    @Published var volume: String = ""
-    @Published var price: String = ""
+    init(car: Car, fillupId: UUID) {
+        self.car = car
+        
+        guard let fillup = car.fillups.first(where: { f in f.id == fillupId }) else {
+            id = UUID()
+            date = dateFormatter.string(from: Date())
+            isEditing = false
+            return
+        }
+        
+        id = fillup.id
+        date = dateFormatter.string(from: fillup.date)
+        odometer = "\(fillup.odometer)"
+        volume = "\(fillup.volume)"
+        price = "\(fillup.literPrice)"
+        
+        isEditing = true
+    }
+    
+    let car: Car
+    
+    @Published var date: String { didSet { validate() } }
+    @Published var odometer: String = "" { didSet { validate() } }
+    @Published var volume: String = "" { didSet { validate() } }
+    @Published var price: String = "" { didSet { validate() } }
+    
+    @Published var isValid = false
+    
+    func save() {
+        guard let fillup = fillup else { return }
+        
+        if isEditing {
+            car.updateFillup(fillup)
+        }
+        else
+        {
+            car.addNewFillup(fillup)
+        }
+    }
+    
+    private func validate(){
+        isValid = fillup != nil
+    }
+    
+    private var fillup: Fillup? {
+        guard
+            let aDate = dateFormatter.date(from: date),
+            let aOdometer = Int(odometer),
+            let aVolume = Float(volume),
+            let aPrice = Float(price) else {
+            return nil
+        }
+        
+        return Fillup.createFrom(date: aDate, odometer: aOdometer, volume: aVolume, price: aPrice, id: id)
+    }
 }
-
-
-//
-////    @State private var date = "20/2-2021"
-////    @State private var odometer: String = "" //14753"
-////    @State private var volume: String = "" //32.12"
-////    @State private var price: String = ""// "10.59"
-//
-//private var date: String {
-//    let formatter = DateFormatter()
-//    formatter.dateFormat = "dd/MM-yyyy HH:mm"
-//    return formatter.string(from: fillup.date)
-//}
-//
-//private func getString(_ number: Float?) -> String {
-//    guard let number = number else {
-//        return ""
-//    }
-//    
-//    return "\(number)"
-//}
-//
-//private func getString(_ number: Int?) -> String {
-//    guard let number = number else {
-//        return ""
-//    }
-//    
-//    return "\(number)"
-//}
-//
-//private var odometer: String { getString(fillup.odometer) }
-//private var volume: String { getString(fillup.volume) }
-//private var price: String { getString(fillup.literPrice) }

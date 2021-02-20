@@ -26,7 +26,7 @@ struct CarDetailView: View {
                     FillupsView(car: car)
                 }
                 else{
-                    GraphView()
+                    GraphView(car: car)
                         
                 }
             }
@@ -57,7 +57,7 @@ struct CarDetailView: View {
                 Image(systemName: "plus")
             })
             .sheet(isPresented: $addingFillup, content: {
-                FillupView()
+                FillupView(car: car)
             })
         })
     }

@@ -23,7 +23,6 @@
 		2FA0B5CA25E0391B005E700D /* GarageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59B25E03867005E700D /* GarageView.swift */; };
 		B368CFF425E147E600C2DFBC /* GarageViewListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368CFF325E147E600C2DFBC /* GarageViewListItemView.swift */; };
 		C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */; };
-		C5E8C05425E10F3900E60D5E /* HtmyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8C05325E10F3900E60D5E /* HtmyTestView.swift */; };
 		C5E8C05D25E13F6400E60D5E /* TempFillup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8C05C25E13F6400E60D5E /* TempFillup.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +65,6 @@
 		2FA0B5B825E0386A005E700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B368CFF325E147E600C2DFBC /* GarageViewListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewListItemView.swift; sourceTree = "<group>"; };
 		C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeInput.swift; sourceTree = "<group>"; };
-		C5E8C05325E10F3900E60D5E /* HtmyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmyTestView.swift; sourceTree = "<group>"; };
 		C5E8C05C25E13F6400E60D5E /* TempFillup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFillup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +156,6 @@
 				2FA0B59D25E0386A005E700D /* Assets.xcassets */,
 				2FA0B5A225E0386A005E700D /* Info.plist */,
 				2FA0B59F25E0386A005E700D /* Preview Content */,
-				C5E8C05325E10F3900E60D5E /* HtmyTestView.swift */,
 			);
 			path = MeterLog;
 			sourceTree = "<group>";
@@ -354,7 +351,6 @@
 				B368CFF425E147E600C2DFBC /* GarageViewListItemView.swift in Sources */,
 				2F822D1025E0498F00B3C5A8 /* AddCarView.swift in Sources */,
 				C5E8C05D25E13F6400E60D5E /* TempFillup.swift in Sources */,
-				C5E8C05425E10F3900E60D5E /* HtmyTestView.swift in Sources */,
 				2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */,
 				2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */,
 				2F822D2025E1327D00B3C5A8 /* GraphContainer.swift in Sources */,
