@@ -48,12 +48,15 @@ struct AwesomeInput: UIViewRepresentable {
     @Binding var selection: Int?
     var tag: Int
     var validator: (String) -> String = { text in text }
+    var returnKeyType: UIReturnKeyType = .default
     
     func makeUIView(context: UIViewRepresentableContext<AwesomeInput>) -> UITextField {
         let textField = UITextField(frame: .zero)
         textField.setContentCompressionResistancePriority(.required, for: .vertical)
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         textField.delegate = context.coordinator
+        textField.keyboardType = .decimalPad
+        textField.returnKeyType = returnKeyType
         return textField
     }
     

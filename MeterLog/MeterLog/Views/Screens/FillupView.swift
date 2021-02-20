@@ -10,13 +10,13 @@ import SwiftUI
 struct MyInput : View {
     
     var title: String
+    @Binding var value: String
     var unit: String? = nil
     @Binding var selection: Int?
     var tag: Int
     
-    @Binding var value: String
-    
     var validator: (String) -> String = { text in text }
+    var returnKeyType: UIReturnKeyType = .default
     var isDate = false
     
     var body: some View {
@@ -33,11 +33,12 @@ struct MyInput : View {
                     }
                     else
                     {
-                        AwesomeInput(text: $value, selection: $selection, tag: tag, validator: validator)
-//                        TextField(title, text: $value)
-//                            .multilineTextAlignment(.trailing)
-//                            .textFieldStyle(PlainTextFieldStyle())
-//                            .keyboardType(.numbersAndPunctuation)
+                        AwesomeInput(
+                            text: $value,
+                            selection: $selection,
+                            tag: tag,
+                            validator: validator,
+                            returnKeyType: returnKeyType)
                     }
                     
                     Rectangle()
@@ -58,17 +59,12 @@ struct MyInput : View {
 }
 
 struct FillupView: View {
-//    @State private var date = Date()
-//    @State private var odometer: Int = 0
-//    @State private var volume: Float = 0
-//    @State private var price: String = ""
-    
     @State private var date = "20/2-2021"
     @State private var odometer = "14753"
     @State private var volume = "32.12"
     @State private var price = "10.59"
     
-    @State private var selection: Int? = 0
+    @State private var selection: Int? = 2
     
     let intValidator: (String) -> String = { text in text.filter { c in c.isNumber } }
     let floatValidator: (String) -> String = { text in text.filter { c in c.isNumber || c == "." } }
@@ -84,11 +80,41 @@ struct FillupView: View {
             
             Spacer()
             
-            MyInput(title: "Date", unit: "", selection: $selection, tag: 1, value: $date, isDate: true)
+            MyInput(
+                title: "Date",
+                value: $date,
+                unit: "",
+                selection: $selection,
+                tag: 1,
+                returnKeyType: .next,
+                isDate: true)
             
-            MyInput(title: "Odometer", unit: "km", selection: $selection, tag: 2, value: $odometer, validator: intValidator)
-            MyInput(title: "Volume", unit: "l", selection: $selection, tag: 3, value: $volume, validator: floatValidator)
-            MyInput(title: "Price", unit: "$/l", selection: $selection, tag: 4, value: $price, validator: floatValidator)
+            MyInput(
+                title: "Odometer",
+                value: $odometer,
+                unit: "km",
+                selection: $selection,
+                tag: 2,
+                validator: intValidator,
+                returnKeyType: .next)
+            
+            MyInput(
+                title: "Volume",
+                value: $volume,
+                unit: "l",
+                selection: $selection,
+                tag: 3,
+                validator: floatValidator,
+                returnKeyType: .next)
+            
+            MyInput(
+                title: "Price",
+                value: $price,
+                unit: "$/l",
+                selection: $selection,
+                tag: 4,
+                validator: floatValidator,
+                returnKeyType: .send)
             
             HStack{
                 Spacer()
