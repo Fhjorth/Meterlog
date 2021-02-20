@@ -14,10 +14,12 @@ struct GraphContainer: View {
     
     
     var body: some View {
-        VStack{
-            LineView(data: [8,23,54,32,12,37,7,23,43] , title: "test", legend: "Full screen", style: Styles.barChartStyleNeonBlueLight).padding()
-                // legend is optional, use optional .padding()
-        }
+//        VStack{
+//            
+//        }
+        
+        LineView(data: [8,23,54,32,12,37,7,23,43] , title: "test", legend: "Full screen", style: Styles.barChartStyleNeonBlueLight).padding()
+            // legend is optional, use optional .padding()
     }
 }
 
