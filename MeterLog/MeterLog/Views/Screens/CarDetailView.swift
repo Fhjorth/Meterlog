@@ -26,7 +26,7 @@ struct CarDetailView: View {
                     FillupsView(car: car)
                 }
                 else{
-                    GraphView()
+                    GraphView(car: car)
                         
                 }
             }
