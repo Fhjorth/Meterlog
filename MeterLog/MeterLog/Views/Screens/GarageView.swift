@@ -24,7 +24,7 @@ struct GarageView: View {
         NavigationView {
             List(carManager.cars) {car in
                 ZStack {
-                    GarageViewListItemView(carName: car.name)
+                    GarageViewListItemView(carName: car.name, carKilometers: String(car.fillups.last?.odometer ?? 0))
                     NavigationLink(destination: CarDetailView(car: car)){
                         
                     }
@@ -43,7 +43,7 @@ struct GarageView: View {
                         .font(.title)
                 })
                 .sheet(isPresented: $addingNewCar, content: {
-                    AddCarView(haveToPresent: $addingNewCar)
+                    AddCarView(haveToPresent: $addingNewCar, car: Car(id: UUID(), name: ""))
                 })
             })
         }

@@ -48,7 +48,7 @@ struct CarDetailView: View {
                 
             })
             .sheet(isPresented: $editingCar, content: {
-                AddCarView(haveToPresent: $editingCar)
+                AddCarView(haveToPresent: .constant(true), car: car)
             })
             
             Button(action: {
