@@ -75,6 +75,11 @@ struct FillupView: View {
         fillup = TempFillup(car: car)
     }
     
+    init(car: Car, fillupId: UUID) {
+        self.car = car
+        fillup = TempFillup(car: car, fillupId: fillupId)
+    }
+    
     var car: Car
     @ObservedObject var fillup: TempFillup
     

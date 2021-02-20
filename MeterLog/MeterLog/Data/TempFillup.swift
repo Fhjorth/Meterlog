@@ -10,7 +10,8 @@ import Foundation
 
 class TempFillup: ObservableObject {
     
-    private var id: UUID
+    private let id: UUID
+    private let isEditing: Bool
 
     private let dateFormatter: DateFormatter = {
        let formatter = DateFormatter()
@@ -22,6 +23,26 @@ class TempFillup: ObservableObject {
         self.car = car
         id = UUID()
         date = dateFormatter.string(from: Date())
+        isEditing = false
+    }
+    
+    init(car: Car, fillupId: UUID) {
+        self.car = car
+        
+        guard let fillup = car.fillups.first(where: { f in f.id == fillupId }) else {
+            id = UUID()
+            date = dateFormatter.string(from: Date())
+            isEditing = false
+            return
+        }
+        
+        id = fillup.id
+        date = dateFormatter.string(from: fillup.date)
+        odometer = "\(fillup.odometer)"
+        volume = "\(fillup.volume)"
+        price = "\(fillup.literPrice)"
+        
+        isEditing = true
     }
     
     let car: Car
@@ -36,7 +57,13 @@ class TempFillup: ObservableObject {
     func save() {
         guard let fillup = fillup else { return }
         
-        car.addNewFillup(fillup)
+        if isEditing {
+            car.updateFillup(fillup)
+        }
+        else
+        {
+            car.addNewFillup(fillup)
+        }
     }
     
     private func validate(){
@@ -52,6 +79,6 @@ class TempFillup: ObservableObject {
             return nil
         }
         
-        return Fillup.createFrom(date: aDate, odometer: aOdometer, volume: aVolume, price: aPrice)
+        return Fillup.createFrom(date: aDate, odometer: aOdometer, volume: aVolume, price: aPrice, id: id)
     }
 }
