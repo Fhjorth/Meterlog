@@ -20,7 +20,7 @@ struct MeterLogApp: App {
             }
             else
             {
-                ContentView()
+                GarageView()
                     .environmentObject(carManager)
             }
         }
