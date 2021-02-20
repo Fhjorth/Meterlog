@@ -66,6 +66,9 @@ struct MyInput : View {
 }
 
 struct FillupView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    var car: Car
     @ObservedObject var fillup = TempFillup()
     
     @State private var selection: Int? = 2
@@ -74,9 +77,11 @@ struct FillupView: View {
     let floatValidator: (String) -> String = { text in text.filter { c in c.isNumber || c == "." } }
     
     private func next() { selection = (selection ?? 0) + 1 }
+    
     private func save() {
         selection = nil
-        print("Saving the things!")
+        fillup.save()
+        presentationMode.wrappedValue.dismiss()
     }
     
     var body: some View {
@@ -138,13 +143,14 @@ struct FillupView: View {
                 HStack{
                     Spacer()
                     
-                    Button(action: {}) {
+                    Button(action: save) {
                         Text("Save")
                     }
+                    .disabled(fillup.isValid == false)
                     .padding(8)
                     .frame(minWidth: 100)
                     .foregroundColor(.white)
-                    .background(Color.blue)
+                    .background(fillup.isValid ? Color.blue : Color.blue.opacity(0.5))
                     .cornerRadius(8)
                 }
             }.padding()
@@ -155,7 +161,7 @@ struct FillupView: View {
 struct FillupView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FillupView()
+            FillupView(car: Car.carForTest)
         }
     }
 }

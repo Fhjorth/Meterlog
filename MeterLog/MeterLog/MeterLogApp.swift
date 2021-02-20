@@ -11,10 +11,18 @@ import SwiftUI
 struct MeterLogApp: App {
     let carManager = CarManager.carManagerForTest
     
+    var isHtmy = true
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(carManager)
+            if isHtmy {
+                FillupView(car: Car.carForTest)
+            }
+            else
+            {
+                ContentView()
+                    .environmentObject(carManager)
+            }
         }
     }
 }

@@ -57,7 +57,7 @@ struct CarDetailView: View {
                 Image(systemName: "plus")
             })
             .sheet(isPresented: $addingFillup, content: {
-                FillupView()
+                FillupView(car: car)
             })
         })
     }
