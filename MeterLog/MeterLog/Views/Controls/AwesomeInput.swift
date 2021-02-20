@@ -12,16 +12,23 @@ struct AwesomeInput: UIViewRepresentable {
         
         @Binding var text: String
         @Binding var selection: Int?
-        var tag: Int
+        let tag: Int
+        let validator: (String) -> String
         
-        init(text: Binding<String>, selection: Binding<Int?>, tag: Int){
+        init(
+            text: Binding<String>,
+            selection: Binding<Int?>,
+            tag: Int,
+            validator: @escaping (String) -> String){
             _text = text
             _selection = selection
             self.tag = tag
+            self.validator = validator
         }
         
         func textFieldDidChangeSelection(_ textField: UITextField) {
-            let newText = textField.text ?? ""
+            let newText = validator(textField.text ?? "")
+            textField.text = newText
             if text != newText {
                 text = newText
             }
@@ -38,19 +45,20 @@ struct AwesomeInput: UIViewRepresentable {
     }
     
     @Binding var text: String
-    
     @Binding var selection: Int?
-    
     var tag: Int
+    var validator: (String) -> String = { text in text }
     
     func makeUIView(context: UIViewRepresentableContext<AwesomeInput>) -> UITextField {
         let textField = UITextField(frame: .zero)
+        textField.setContentCompressionResistancePriority(.required, for: .vertical)
+        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         textField.delegate = context.coordinator
         return textField
     }
     
     func makeCoordinator() -> AwesomeInput.Coordinator {
-        return Coordinator(text: $text, selection: $selection, tag: tag)
+        return Coordinator(text: $text, selection: $selection, tag: tag, validator: validator)
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<AwesomeInput>) {
@@ -60,7 +68,6 @@ struct AwesomeInput: UIViewRepresentable {
             uiView.becomeFirstResponder()
         }
     }
-
 }
 
 struct AwesomeInput_Previews: PreviewProvider {

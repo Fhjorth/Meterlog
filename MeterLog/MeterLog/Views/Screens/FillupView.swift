@@ -10,25 +10,14 @@ import SwiftUI
 struct MyInput : View {
     
     var title: String
-    
     var unit: String? = nil
+    @Binding var selection: Int?
+    var tag: Int
     
+    @Binding var value: String
+    
+    var validator: (String) -> String = { text in text }
     var isDate = false
-    
-    @State
-    var value = "0" {
-        didSet {
-            if isDate {
-                
-            }
-            else {
-                let filtered = value.filter{ c in c.isNumber || c == "." }
-                if value != filtered {
-                    value = filtered
-                }
-            }
-        }
-    }
     
     var body: some View {
         VStack(spacing: 0){
@@ -44,10 +33,11 @@ struct MyInput : View {
                     }
                     else
                     {
-                        TextField(title, text: $value)
-                            .multilineTextAlignment(.trailing)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .keyboardType(.numbersAndPunctuation)
+                        AwesomeInput(text: $value, selection: $selection, tag: tag, validator: validator)
+//                        TextField(title, text: $value)
+//                            .multilineTextAlignment(.trailing)
+//                            .textFieldStyle(PlainTextFieldStyle())
+//                            .keyboardType(.numbersAndPunctuation)
                     }
                     
                     Rectangle()
@@ -68,25 +58,37 @@ struct MyInput : View {
 }
 
 struct FillupView: View {
-    @State
-    private var date = Date()
+//    @State private var date = Date()
+//    @State private var odometer: Int = 0
+//    @State private var volume: Float = 0
+//    @State private var price: String = ""
     
-    @State
-    private var odometer: Int = 0
+    @State private var date = "20/2-2021"
+    @State private var odometer = "14753"
+    @State private var volume = "32.12"
+    @State private var price = "10.59"
     
-    @State
-    private var volume: Float = 0
+    @State private var selection: Int? = 0
     
-    @State
-    private var price: String = ""
+    let intValidator: (String) -> String = { text in text.filter { c in c.isNumber } }
+    let floatValidator: (String) -> String = { text in text.filter { c in c.isNumber || c == "." } }
     
     var body: some View {
         VStack {
-            MyInput(title: "Date", unit: "", isDate: true)
             
-            MyInput(title: "Odometer", unit: "km")
-            MyInput(title: "Volume", unit: "l")
-            MyInput(title: "Price", unit: "$/l")
+            Text(selection == 1 ? date
+                : selection == 2 ? odometer
+                : selection == 3 ? volume
+                : selection == 4 ? price
+                : "Nothing selected")
+            
+            Spacer()
+            
+            MyInput(title: "Date", unit: "", selection: $selection, tag: 1, value: $date, isDate: true)
+            
+            MyInput(title: "Odometer", unit: "km", selection: $selection, tag: 2, value: $odometer, validator: intValidator)
+            MyInput(title: "Volume", unit: "l", selection: $selection, tag: 3, value: $volume, validator: floatValidator)
+            MyInput(title: "Price", unit: "$/l", selection: $selection, tag: 4, value: $price, validator: floatValidator)
             
             HStack{
                 Spacer()
