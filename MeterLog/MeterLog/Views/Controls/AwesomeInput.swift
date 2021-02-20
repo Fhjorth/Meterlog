@@ -45,10 +45,12 @@ struct AwesomeInput: UIViewRepresentable {
     }
     
     @Binding var text: String
+    var placeholder: String?
+    
     @Binding var selection: Int?
     var tag: Int
+    
     var validator: (String) -> String = { text in text }
-    var returnKeyType: UIReturnKeyType = .default
     
     var nextText: String?
     var nextAction: () -> () = { }
@@ -59,18 +61,20 @@ struct AwesomeInput: UIViewRepresentable {
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         textField.delegate = context.coordinator
         
-        textField.keyboardType = .decimalPad
-        textField.returnKeyType = returnKeyType
+        textField.textAlignment = .right
+        textField.placeholder = placeholder
         
-        let accessoryCtrl = UIHostingController(rootView: createToolbar())
-        accessoryCtrl.view.sizeToFit()
-        textField.inputAccessoryView = accessoryCtrl.view
+        textField.keyboardType = .decimalPad
         
         return textField
     }
     
     func makeCoordinator() -> AwesomeInput.Coordinator {
-        return Coordinator(text: $text, selection: $selection, tag: tag, validator: validator)
+        return Coordinator(
+            text: $text,
+            selection: $selection,
+            tag: tag,
+            validator: validator)
     }
     
     func updateUIView(_ uiView: UITextField, context: UIViewRepresentableContext<AwesomeInput>) {
@@ -79,6 +83,13 @@ struct AwesomeInput: UIViewRepresentable {
         if selection == tag && uiView.isEditing == false{
             uiView.becomeFirstResponder()
         }
+        else if uiView.isEditing && selection == nil {
+            uiView.resignFirstResponder()
+        }
+        
+        let accessoryCtrl = UIHostingController(rootView: createToolbar())
+        accessoryCtrl.view.sizeToFit()
+        uiView.inputAccessoryView = accessoryCtrl.view
     }
     
     // TODO Move into own view
