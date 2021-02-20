@@ -13,7 +13,7 @@ struct MeterLogApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GarageView()
                 .environmentObject(carManager)
         }
     }
