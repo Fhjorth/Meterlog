@@ -7,48 +7,18 @@
 
 import SwiftUI
 
-struct MyInput : View {
-    
+struct InputView<Content: View> : View {
     var title: String
-    @Binding var value: String
-    var placeholder: String?
     var unit: String? = nil
     
-    @Binding var selection: Int?
-    var tag: Int
-    
-    var validator: (String) -> String = { text in text }
-    
-    var nextText: String?
-    var nextAction: () -> () = { }
-    @Binding var nextActionEnabled: Bool
-    
-    var isDate = false
+    var content: () -> Content
     
     var body: some View {
         VStack(spacing: 0){
             HStack(spacing: 0) {
                 VStack(spacing: 0) {
                     
-                    if isDate {
-                        Button(action: {}) {
-                            Spacer()
-                            Text(value)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    else
-                    {
-                        AwesomeInput(
-                            text: $value,
-                            placeholder: placeholder,
-                            selection: $selection,
-                            tag: tag,
-                            validator: validator,
-                            nextText: nextText,
-                            nextAction: nextAction,
-                            nextActionEnabled: $nextActionEnabled)
-                    }
+                    content()
                     
                     Rectangle()
                         .fill(Color.black)
@@ -63,6 +33,64 @@ struct MyInput : View {
                 Spacer(minLength: 4)
                 Text(unit ?? "")
             }
+        }
+    }
+}
+
+struct TextInputView : View {
+    var title: String
+    @Binding var value: String
+    var placeholder: String?
+    var unit: String? = nil
+    
+    @Binding var selection: Int?
+    var tag: Int
+    
+    var validator: (String) -> String = { text in text }
+    
+    var nextText: String?
+    var nextAction: () -> () = { }
+    @Binding var nextActionEnabled: Bool
+    
+    var body: some View {
+        InputView(title: title, unit: unit) {
+            AwesomeInput(
+                text: $value,
+                placeholder: placeholder,
+                selection: $selection,
+                tag: tag,
+                validator: validator,
+                nextText: nextText,
+                nextAction: nextAction,
+                nextActionEnabled: $nextActionEnabled)
+        }
+    }
+}
+
+struct DateInputView : View {
+    var title: String
+    @Binding var value: Date
+    
+    var touchAction: () -> () = { }
+    
+    // TODO Next
+    var nextText: String?
+    var nextAction: () -> () = { }
+    @Binding var nextActionEnabled: Bool
+    
+    private let formatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "dd/MM-yyyy HH:mm"
+        return f
+    }()
+    
+    var body: some View {
+        InputView(title: title) {
+            Button(action: touchAction) {
+                Spacer()
+                Text(formatter.string(from: value))
+            }
+            .buttonStyle(PlainButtonStyle())
         }
     }
 }
@@ -83,6 +111,8 @@ struct FillupView: View {
     var car: Car
     @ObservedObject var fillup: TempFillup
     
+    @State private var showingDatePicker = false
+    
     @State private var selection: Int? = 2
     
     let intValidator: (String) -> String = { text in text.filter { c in c.isNumber } }
@@ -100,27 +130,28 @@ struct FillupView: View {
         ScrollView{
             VStack {
                 
-                Text(selection == 1 ? fillup.date
-                        : selection == 2 ? fillup.odometer
-                        : selection == 3 ? fillup.volume
-                        : selection == 4 ? fillup.price
-                        : "Nothing selected")
+//                Text(selection == 1 ? "fillup.date"
+//                        : selection == 2 ? fillup.odometer
+//                        : selection == 3 ? fillup.volume
+//                        : selection == 4 ? fillup.price
+//                        : "Nothing selected")
+//
+//                Spacer()
                 
-                Spacer()
-                
-                MyInput(
+                DateInputView(
                     title: "Date",
                     value: $fillup.date,
-                    placeholder: "1/12-2021",
-                    unit: "",
-                    selection: $selection,
-                    tag: 1,
+                    touchAction: {
+                        selection = nil
+                        withAnimation {
+                            showingDatePicker = true
+                        }
+                    },
                     nextText: "Next",
                     nextAction: next,
-                    nextActionEnabled: .constant(true),
-                    isDate: true)
+                    nextActionEnabled: .constant(true))
                 
-                MyInput(
+                TextInputView(
                     title: "Odometer",
                     value: $fillup.odometer,
                     placeholder: "42500",
@@ -132,7 +163,7 @@ struct FillupView: View {
                     nextAction: next,
                     nextActionEnabled: .constant(true))
                 
-                MyInput(
+                TextInputView(
                     title: "Volume",
                     value: $fillup.volume,
                     placeholder: "32.76",
@@ -144,7 +175,7 @@ struct FillupView: View {
                     nextAction: next,
                     nextActionEnabled: .constant(true))
                 
-                MyInput(
+                TextInputView(
                     title: "Price",
                     value: $fillup.price,
                     placeholder: "10.59",
@@ -170,6 +201,32 @@ struct FillupView: View {
                     .cornerRadius(8)
                 }
             }.padding()
+        }
+        .customBottomSheet(isPresented: $showingDatePicker) {
+            VStack {
+                DatePicker("Date", selection: $fillup.date)
+                    .datePickerStyle(WheelDatePickerStyle())
+                HStack {
+                    Spacer()
+                
+                    Button(action: {
+                        withAnimation {
+                            showingDatePicker = false
+                        }
+                        selection = 2
+                    }){
+                        Text("Next")
+                    }
+                    .padding(8)
+                    .frame(minWidth: 100)
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
+                }
+                .padding()
+            }
+            .background(Color.white)
+                
         }
     }
 }
