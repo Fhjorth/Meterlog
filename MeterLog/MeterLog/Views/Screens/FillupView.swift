@@ -17,6 +17,10 @@ struct MyInput : View {
     
     var validator: (String) -> String = { text in text }
     var returnKeyType: UIReturnKeyType = .default
+    
+    var nextText: String?
+    var nextAction: () -> () = { }
+    
     var isDate = false
     
     var body: some View {
@@ -38,7 +42,9 @@ struct MyInput : View {
                             selection: $selection,
                             tag: tag,
                             validator: validator,
-                            returnKeyType: returnKeyType)
+                            returnKeyType: returnKeyType,
+                            nextText: nextText,
+                            nextAction: nextAction)
                     }
                     
                     Rectangle()
@@ -69,71 +75,89 @@ struct FillupView: View {
     let intValidator: (String) -> String = { text in text.filter { c in c.isNumber } }
     let floatValidator: (String) -> String = { text in text.filter { c in c.isNumber || c == "." } }
     
+    private func next() { selection = (selection ?? 0) + 1 }
+    private func save() {
+        selection = nil
+        print("Saving the things!")
+    }
+    
     var body: some View {
-        VStack {
-            
-            Text(selection == 1 ? date
-                : selection == 2 ? odometer
-                : selection == 3 ? volume
-                : selection == 4 ? price
-                : "Nothing selected")
-            
-            Spacer()
-            
-            MyInput(
-                title: "Date",
-                value: $date,
-                unit: "",
-                selection: $selection,
-                tag: 1,
-                returnKeyType: .next,
-                isDate: true)
-            
-            MyInput(
-                title: "Odometer",
-                value: $odometer,
-                unit: "km",
-                selection: $selection,
-                tag: 2,
-                validator: intValidator,
-                returnKeyType: .next)
-            
-            MyInput(
-                title: "Volume",
-                value: $volume,
-                unit: "l",
-                selection: $selection,
-                tag: 3,
-                validator: floatValidator,
-                returnKeyType: .next)
-            
-            MyInput(
-                title: "Price",
-                value: $price,
-                unit: "$/l",
-                selection: $selection,
-                tag: 4,
-                validator: floatValidator,
-                returnKeyType: .send)
-            
-            HStack{
+        ScrollView{
+            VStack {
+                
+                Text(selection == 1 ? date
+                    : selection == 2 ? odometer
+                    : selection == 3 ? volume
+                    : selection == 4 ? price
+                    : "Nothing selected")
+                
                 Spacer()
                 
-                Button(action: {}) {
-                    Text("Save")
+                MyInput(
+                    title: "Date",
+                    value: $date,
+                    unit: "",
+                    selection: $selection,
+                    tag: 1,
+                    returnKeyType: .next,
+                    nextText: "Next",
+                    nextAction: next,
+                    isDate: true)
+                
+                MyInput(
+                    title: "Odometer",
+                    value: $odometer,
+                    unit: "km",
+                    selection: $selection,
+                    tag: 2,
+                    validator: intValidator,
+                    returnKeyType: .next,
+                    nextText: "Next",
+                    nextAction: next)
+                
+                MyInput(
+                    title: "Volume",
+                    value: $volume,
+                    unit: "l",
+                    selection: $selection,
+                    tag: 3,
+                    validator: floatValidator,
+                    returnKeyType: .next,
+                    nextText: "Next",
+                    nextAction: next)
+                
+                MyInput(
+                    title: "Price",
+                    value: $price,
+                    unit: "$/l",
+                    selection: $selection,
+                    tag: 4,
+                    validator: floatValidator,
+                    returnKeyType: .send,
+                    nextText: "Save",
+                    nextAction: save)
+                
+                HStack{
+                    Spacer()
+                    
+                    Button(action: {}) {
+                        Text("Save")
+                    }
+                    .padding(8)
+                    .frame(minWidth: 100)
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(8)
                 }
-                .padding(8)
-                .frame(minWidth: 100)
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .cornerRadius(8)
-            }
-        }.padding()
+            }.padding()
+        }
     }
 }
 
 struct FillupView_Previews: PreviewProvider {
     static var previews: some View {
-        FillupView()
+        NavigationView {
+            FillupView()
+        }
     }
 }

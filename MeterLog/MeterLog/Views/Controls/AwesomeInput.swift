@@ -50,13 +50,22 @@ struct AwesomeInput: UIViewRepresentable {
     var validator: (String) -> String = { text in text }
     var returnKeyType: UIReturnKeyType = .default
     
+    var nextText: String?
+    var nextAction: () -> () = { }
+    
     func makeUIView(context: UIViewRepresentableContext<AwesomeInput>) -> UITextField {
         let textField = UITextField(frame: .zero)
         textField.setContentCompressionResistancePriority(.required, for: .vertical)
         textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
         textField.delegate = context.coordinator
+        
         textField.keyboardType = .decimalPad
         textField.returnKeyType = returnKeyType
+        
+        let accessoryCtrl = UIHostingController(rootView: createToolbar())
+        accessoryCtrl.view.sizeToFit()
+        textField.inputAccessoryView = accessoryCtrl.view
+        
         return textField
     }
     
@@ -70,6 +79,39 @@ struct AwesomeInput: UIViewRepresentable {
         if selection == tag && uiView.isEditing == false{
             uiView.becomeFirstResponder()
         }
+    }
+    
+    // TODO Move into own view
+    private func createToolbar() -> some View {
+        guard let text = nextText else {
+            return AnyView(EmptyView())
+        }
+        
+        return AnyView(
+            VStack(spacing: 0){
+                Rectangle()
+                    .fill(Color.gray)
+                    .frame(height: 2)
+                    .frame(maxWidth: .infinity)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        nextAction()
+                    }){
+                        Text(text)
+                    }
+                    Spacer()
+                        .frame(width: 16)
+                }
+                .frame(maxHeight: .infinity)
+            }
+            .frame(height: 44)
+            .frame(maxWidth: .infinity)
+            .background(Color(red: 0.838, green: 0.845, blue: 0.866, opacity: 1)))
+    }
+    
+    private func doNext() {
+        nextAction()
     }
 }
 
