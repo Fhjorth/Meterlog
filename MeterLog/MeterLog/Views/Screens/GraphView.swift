@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct GraphView: View {
+    
+    //var car: Car
+    
     var body: some View {
-        Text("This i graph")
+        VStack {
+            Text("hej")
+        }
     }
 }
 
