@@ -12,6 +12,8 @@ struct GarageView: View {
     @EnvironmentObject
     var carManager: CarManager
     
+    @State private var addingNewCar = false
+    
     var body: some View {
         NavigationView {
             List(carManager.cars){car in
@@ -23,7 +25,20 @@ struct GarageView: View {
                     .buttonStyle(PlainButtonStyle())
                     .opacity(0)
                 }
-            }.navigationBarTitle("MeterMan \nTeam TopNachos")
+            }
+            .listStyle(SidebarListStyle())
+            .navigationBarTitle("MeterMan", displayMode: .inline)
+            .navigationBarItems(trailing: HStack {
+                Button(action: {
+                    addingNewCar.toggle()
+                }, label: {
+                    Image(systemName: "plus")
+                        .font(.title)
+                })
+                .sheet(isPresented: $addingNewCar, content: {
+                    AddNewCarView()
+                })
+            })
         }
         
     }

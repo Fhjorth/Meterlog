@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GarageViewListItemView: View {
     var carName: String
+    var gradient = LinearGradient(gradient: Gradient(colors: [Color(red: 0.13, green: 0.58, blue: 0.69), Color(red: 0.43, green: 0.84, blue: 0.93)]), startPoint: .leading, endPoint: .trailing)
     
     var body: some View {
         HStack {
@@ -23,20 +24,21 @@ struct GarageViewListItemView: View {
                 .padding(20)
             
             
-            Spacer()
+//            Spacer()
             
             VStack(alignment: .leading) {
                 Text(carName)
+                    .font(.custom("HelveticaNeue-Medium", size: 30))
                     .foregroundColor(.white)
                 Text("12345 km")
+                    .font(.custom("HelveticaNeue-Medium", size: 30))
                     .foregroundColor(.white)
                 
-            }
+            }.padding(20)
             
-            Spacer()
+//            Spacer()
         }
-        .background(LinearGradient(gradient: Gradient(colors: [Color(red: 0.13, green: 0.58, blue: 0.69), Color(red: 0.43, green: 0.84, blue: 0.93)]), startPoint: .leading, endPoint: .trailing))
-        .border(Color.red)
+        .background(gradient)
         .cornerRadius(25)
         .padding(.top, 5)
         .padding(.bottom, 5)
