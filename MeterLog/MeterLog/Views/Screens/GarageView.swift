@@ -14,11 +14,17 @@ struct GarageView: View {
     
     @State private var addingNewCar = false
     
+    init() {
+        UITableView.appearance().separatorColor = .clear
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
         NavigationView {
-            List(carManager.cars){car in
+            List(carManager.cars) {car in
                 ZStack {
-                    GarageViewListItemView(carName: car.name)
+                    GarageViewListItemView(carName: car.name, carKilometers: String(car.fillups.last?.odometer ?? 0))
                     NavigationLink(destination: CarDetailView(car: car)){
                         
                     }
@@ -26,7 +32,8 @@ struct GarageView: View {
                     .opacity(0)
                 }
             }
-            .listStyle(SidebarListStyle())
+            //            .listStyle(SidebarListStyle())
+//            .colorMultiply(Color(red: 0.09, green: 0.11, blue: 0.15)).padding()
             .navigationBarTitle("MeterMan", displayMode: .inline)
             .navigationBarItems(trailing: HStack {
                 Button(action: {
@@ -36,7 +43,7 @@ struct GarageView: View {
                         .font(.title)
                 })
                 .sheet(isPresented: $addingNewCar, content: {
-                    AddNewCarView()
+                    AddCarView(haveToPresent: $addingNewCar, car: Car(id: UUID(), name: ""))
                 })
             })
         }

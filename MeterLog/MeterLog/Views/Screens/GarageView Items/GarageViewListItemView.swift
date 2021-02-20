@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GarageViewListItemView: View {
     var carName: String
+    var carKilometers: String
     var gradient = LinearGradient(gradient: Gradient(colors: [Color(red: 0.13, green: 0.58, blue: 0.69), Color(red: 0.43, green: 0.84, blue: 0.93)]), startPoint: .leading, endPoint: .trailing)
     
     var body: some View {
@@ -22,21 +23,16 @@ struct GarageViewListItemView: View {
                 .clipped()
                 .cornerRadius(20.0)
                 .padding(20)
-            
-            
-//            Spacer()
-            
+
             VStack(alignment: .leading) {
                 Text(carName)
                     .font(.custom("HelveticaNeue-Medium", size: 30))
                     .foregroundColor(.white)
-                Text("12345 km")
+                Text("\(carKilometers) km")
                     .font(.custom("HelveticaNeue-Medium", size: 30))
                     .foregroundColor(.white)
                 
             }.padding(20)
-            
-//            Spacer()
         }
         .background(gradient)
         .cornerRadius(25)
@@ -49,6 +45,6 @@ struct GarageViewListItemView: View {
 
 struct GarageViewListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        GarageViewListItemView(carName: "VW UP!")
+        GarageViewListItemView(carName: "VW UP!", carKilometers: "1235 km")
     }
 }
