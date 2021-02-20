@@ -24,7 +24,7 @@ struct Fillup: Identifiable {
 
 class Car: ObservableObject, Identifiable {
     var id: UUID
-    var name: String = ""
+    @Published var name: String = ""
     
     init(id: UUID, name: String) {
         self.id = id

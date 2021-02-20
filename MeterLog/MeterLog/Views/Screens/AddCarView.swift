@@ -10,10 +10,6 @@ import SwiftUI
 struct AddCarView: View {
     @Binding var haveToPresent: Bool
     @ObservedObject var car: Car
-    @State var carName = ""
-    @State var carKilometers = ""
-    @State var everythingIsEmpty: Bool = false
-    @State var editingMode: Bool = false
     
     var body: some View {
         ZStack {
@@ -21,65 +17,32 @@ struct AddCarView: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                if let name = car.name {
-                    Text(name)
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding(.bottom, 20)
-                        .padding(.top, 20)
-                }
-                if !carName.isEmpty {
-                    Text(carName)
-                        .foregroundColor(.white)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .padding(.bottom, 20)
-                        .padding(.top, 20)
-                }
-                
-                if let km = car.fillups.last?.odometer {
-                    Text("\(km)")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 20)
-                        .padding(.top, 20)
-                }
-                
-                if !carKilometers.isEmpty {
-                    Text(carKilometers)
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 20)
-                        .padding(.top, 20)
-                }
+                Text(car.name)
+                    .foregroundColor(.white)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 20)
+                    .padding(.top, 20)
                 
                 Spacer()
                 
-                MyTextfield(textFieldValue: $carName, editingMode: $editingMode, placeholder: "Car Name")
-                
-                MyTextfield(textFieldValue: $carKilometers, editingMode: $editingMode, placeholder: "Car Kilometers")
-                
+                MyTextfield(textFieldValue: $car.name, placeholder: "Car Name")                
                 
                 Spacer()
                 
                 Button(action: {
-                    let carToAdd = Car(id: UUID(), name: carName)
-                    carToAdd.fillups.append(Fillup(id: UUID(), date: Date(), odometer: Int(carKilometers) ?? 0, volume: 0, literPrice: 0))
-                    CarManager.carManagerForTest.cars.append(carToAdd)
+                    CarManager.carManagerForTest.cars.append(car)
                     self.haveToPresent.toggle()
                 }) {
                     Text("Save")
                         .font(.system(.subheadline, design: .rounded))
                         .padding()
                         .overlay(
-                            RoundedRectangle(cornerRadius: 25)
+                            RoundedRectangle(cornerRadius: 15)
                                 .stroke(lineWidth: 1)
                         )
                         .foregroundColor(.white)
-                }
+                }.disabled(car.name.isEmpty)
             }
         }
         
@@ -94,8 +57,8 @@ struct AddCarView_Previews: PreviewProvider {
 
 struct MyTextfield: View {
     @Binding var textFieldValue: String
-    @Binding var editingMode: Bool
-    @State var extend: CGFloat = 20
+    @State private var editingMode: Bool = false
+    @State private var extend: CGFloat = 20
     var placeholder: String
     
     var body: some View {
@@ -114,9 +77,9 @@ struct MyTextfield: View {
                 }
             })
             .padding()
-            .border(Color.black)
             .cornerRadius(20)
-            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
+            .border(Color.white)
+            .autocapitalization(.words)
             .padding([.trailing, .leading], extend)
             .animation(Animation.easeOut)
         }

@@ -23,10 +23,7 @@ struct GarageViewListItemView: View {
                 .clipped()
                 .cornerRadius(20.0)
                 .padding(20)
-            
-            
-//            Spacer()
-            
+
             VStack(alignment: .leading) {
                 Text(carName)
                     .font(.custom("HelveticaNeue-Medium", size: 30))
@@ -36,8 +33,6 @@ struct GarageViewListItemView: View {
                     .foregroundColor(.white)
                 
             }.padding(20)
-            
-//            Spacer()
         }
         .background(gradient)
         .cornerRadius(25)
