@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct MeterLogApp: App {
-    let carManager = CarManager.carManagerForTest
+    let carManager = CarManager.carManagerForReal
     
     var isHtmy = false
     
@@ -26,3 +27,19 @@ struct MeterLogApp: App {
         }
     }
 }
+
+//import UIKit
+//import Firebase
+//
+//@UIApplicationMain
+//class AppDelegate: UIResponder, UIApplicationDelegate {
+//
+//  var window: UIWindow?
+//
+//  func application(_ application: UIApplication,
+//    didFinishLaunchingWithOptions launchOptions:
+//      [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//    FirebaseApp.configure()
+//    return true
+//  }
+//}
