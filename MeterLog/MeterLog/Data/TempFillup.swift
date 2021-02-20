@@ -22,7 +22,7 @@ class TempFillup: ObservableObject {
     init(car: Car){
         self.car = car
         id = UUID()
-        date = dateFormatter.string(from: Date())
+        date = Date()
         isEditing = false
     }
     
@@ -31,13 +31,13 @@ class TempFillup: ObservableObject {
         
         guard let fillup = car.fillups.first(where: { f in f.id == fillupId }) else {
             id = UUID()
-            date = dateFormatter.string(from: Date())
+            date = Date()
             isEditing = false
             return
         }
         
         id = fillup.id
-        date = dateFormatter.string(from: fillup.date)
+        date = fillup.date
         odometer = "\(fillup.odometer)"
         volume = "\(fillup.volume)"
         price = "\(fillup.literPrice)"
@@ -47,7 +47,7 @@ class TempFillup: ObservableObject {
     
     let car: Car
     
-    @Published var date: String { didSet { validate() } }
+    @Published var date: Date { didSet { validate() } }
     @Published var odometer: String = "" { didSet { validate() } }
     @Published var volume: String = "" { didSet { validate() } }
     @Published var price: String = "" { didSet { validate() } }
@@ -72,13 +72,12 @@ class TempFillup: ObservableObject {
     
     private var fillup: Fillup? {
         guard
-            let aDate = dateFormatter.date(from: date),
             let aOdometer = Int(odometer),
             let aVolume = Float(volume),
             let aPrice = Float(price) else {
             return nil
         }
         
-        return Fillup.createFrom(date: aDate, odometer: aOdometer, volume: aVolume, price: aPrice, id: id)
+        return Fillup.createFrom(date: date, odometer: aOdometer, volume: aVolume, price: aPrice, id: id)
     }
 }

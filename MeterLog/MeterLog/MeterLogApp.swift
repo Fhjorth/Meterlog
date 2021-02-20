@@ -11,7 +11,7 @@ import SwiftUI
 struct MeterLogApp: App {
     let carManager = CarManager.carManagerForTest
     
-    var isHtmy = false
+    var isHtmy = true
     
     var body: some Scene {
         WindowGroup {
