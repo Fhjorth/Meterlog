@@ -13,7 +13,8 @@ struct GraphView: View {
     
     var body: some View {
         VStack {
-            Text("hej")
+            GraphContainer()
+                .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 300)
         }
     }
 }

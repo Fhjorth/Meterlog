@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct GraphContainer: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        LineView(data: [8,23,54,32,12,37,7,23,43], title: "Line chart", legend: "Full screen") // legend is optional, use optional .padding()
+
     }
 }
 
