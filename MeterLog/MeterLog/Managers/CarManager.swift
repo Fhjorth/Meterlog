@@ -14,6 +14,10 @@ struct Fillup: Identifiable {
     var odometer: Int
     var volume: Float
     var literPrice: Float
+    
+    static func createFrom(date: Date, odometer: Int, volume: Float, price: Float) -> Fillup {
+        return Fillup(id: UUID(), date: date, odometer: odometer, volume: volume, literPrice: price)
+    }
 }
 
 class Car: ObservableObject, Identifiable {
@@ -27,6 +31,12 @@ class Car: ObservableObject, Identifiable {
     
     @Published
     var fillups = [Fillup]()
+    
+    func addNewFillup(_ fillup: Fillup){
+        fillups.append(fillup)
+        
+        // TODO store in cloud
+    }
     
     static var carForTest: Car = {
         let formatter = DateFormatter()
