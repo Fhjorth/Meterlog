@@ -23,6 +23,7 @@
 		2FA0B5CA25E0391B005E700D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59B25E03867005E700D /* ContentView.swift */; };
 		C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */; };
 		C5E8C05425E10F3900E60D5E /* HtmyTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8C05325E10F3900E60D5E /* HtmyTestView.swift */; };
+		C5E8C05D25E13F6400E60D5E /* TempFillup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8C05C25E13F6400E60D5E /* TempFillup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		2FA0B5B825E0386A005E700D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeInput.swift; sourceTree = "<group>"; };
 		C5E8C05325E10F3900E60D5E /* HtmyTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmyTestView.swift; sourceTree = "<group>"; };
+		C5E8C05C25E13F6400E60D5E /* TempFillup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFillup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		2FA0B59825E03867005E700D /* MeterLog */ = {
 			isa = PBXGroup;
 			children = (
+				C5E8C05B25E13F5400E60D5E /* Data */,
 				2F822CFA25E03F4C00B3C5A8 /* Views */,
 				2F822CF125E039E900B3C5A8 /* Managers */,
 				2FA0B59925E03867005E700D /* MeterLogApp.swift */,
@@ -189,6 +192,14 @@
 				C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		C5E8C05B25E13F5400E60D5E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C5E8C05C25E13F6400E60D5E /* TempFillup.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +341,7 @@
 				2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */,
 				2F822D1825E049D500B3C5A8 /* FillupView.swift in Sources */,
 				2F822D1025E0498F00B3C5A8 /* AddCarView.swift in Sources */,
+				C5E8C05D25E13F6400E60D5E /* TempFillup.swift in Sources */,
 				C5E8C05425E10F3900E60D5E /* HtmyTestView.swift in Sources */,
 				2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */,
 				2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */,

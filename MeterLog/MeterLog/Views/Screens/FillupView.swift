@@ -11,12 +11,13 @@ struct MyInput : View {
     
     var title: String
     @Binding var value: String
+    var placeholder: String?
     var unit: String? = nil
+    
     @Binding var selection: Int?
     var tag: Int
     
     var validator: (String) -> String = { text in text }
-    var returnKeyType: UIReturnKeyType = .default
     
     var nextText: String?
     var nextAction: () -> () = { }
@@ -39,10 +40,10 @@ struct MyInput : View {
                     {
                         AwesomeInput(
                             text: $value,
+                            placeholder: placeholder,
                             selection: $selection,
                             tag: tag,
                             validator: validator,
-                            returnKeyType: returnKeyType,
                             nextText: nextText,
                             nextAction: nextAction)
                     }
@@ -65,10 +66,7 @@ struct MyInput : View {
 }
 
 struct FillupView: View {
-    @State private var date = "20/2-2021"
-    @State private var odometer = "14753"
-    @State private var volume = "32.12"
-    @State private var price = "10.59"
+    @ObservedObject var fillup = TempFillup()
     
     @State private var selection: Int? = 2
     
@@ -85,55 +83,55 @@ struct FillupView: View {
         ScrollView{
             VStack {
                 
-                Text(selection == 1 ? date
-                    : selection == 2 ? odometer
-                    : selection == 3 ? volume
-                    : selection == 4 ? price
-                    : "Nothing selected")
+                Text(selection == 1 ? fillup.date
+                        : selection == 2 ? fillup.odometer
+                        : selection == 3 ? fillup.volume
+                        : selection == 4 ? fillup.price
+                        : "Nothing selected")
                 
                 Spacer()
                 
                 MyInput(
                     title: "Date",
-                    value: $date,
+                    value: $fillup.date,
+                    placeholder: "1/12-2021",
                     unit: "",
                     selection: $selection,
                     tag: 1,
-                    returnKeyType: .next,
                     nextText: "Next",
                     nextAction: next,
                     isDate: true)
                 
                 MyInput(
                     title: "Odometer",
-                    value: $odometer,
+                    value: $fillup.odometer,
+                    placeholder: "42500",
                     unit: "km",
                     selection: $selection,
                     tag: 2,
                     validator: intValidator,
-                    returnKeyType: .next,
                     nextText: "Next",
                     nextAction: next)
                 
                 MyInput(
                     title: "Volume",
-                    value: $volume,
+                    value: $fillup.volume,
+                    placeholder: "32.76",
                     unit: "l",
                     selection: $selection,
                     tag: 3,
                     validator: floatValidator,
-                    returnKeyType: .next,
                     nextText: "Next",
                     nextAction: next)
                 
                 MyInput(
                     title: "Price",
-                    value: $price,
+                    value: $fillup.price,
+                    placeholder: "10.59",
                     unit: "$/l",
                     selection: $selection,
                     tag: 4,
                     validator: floatValidator,
-                    returnKeyType: .send,
                     nextText: "Save",
                     nextAction: save)
                 
