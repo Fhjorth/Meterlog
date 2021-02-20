@@ -21,6 +21,7 @@ struct MyInput : View {
     
     var nextText: String?
     var nextAction: () -> () = { }
+    @Binding var nextActionEnabled: Bool
     
     var isDate = false
     
@@ -45,7 +46,8 @@ struct MyInput : View {
                             tag: tag,
                             validator: validator,
                             nextText: nextText,
-                            nextAction: nextAction)
+                            nextAction: nextAction,
+                            nextActionEnabled: $nextActionEnabled)
                     }
                     
                     Rectangle()
@@ -68,8 +70,13 @@ struct MyInput : View {
 struct FillupView: View {
     @Environment(\.presentationMode) var presentationMode
     
+    init(car: Car) {
+        self.car = car
+        fillup = TempFillup(car: car)
+    }
+    
     var car: Car
-    @ObservedObject var fillup = TempFillup()
+    @ObservedObject var fillup: TempFillup
     
     @State private var selection: Int? = 2
     
@@ -105,6 +112,7 @@ struct FillupView: View {
                     tag: 1,
                     nextText: "Next",
                     nextAction: next,
+                    nextActionEnabled: .constant(true),
                     isDate: true)
                 
                 MyInput(
@@ -116,7 +124,8 @@ struct FillupView: View {
                     tag: 2,
                     validator: intValidator,
                     nextText: "Next",
-                    nextAction: next)
+                    nextAction: next,
+                    nextActionEnabled: .constant(true))
                 
                 MyInput(
                     title: "Volume",
@@ -127,7 +136,8 @@ struct FillupView: View {
                     tag: 3,
                     validator: floatValidator,
                     nextText: "Next",
-                    nextAction: next)
+                    nextAction: next,
+                    nextActionEnabled: .constant(true))
                 
                 MyInput(
                     title: "Price",
@@ -138,7 +148,8 @@ struct FillupView: View {
                     tag: 4,
                     validator: floatValidator,
                     nextText: "Save",
-                    nextAction: save)
+                    nextAction: save,
+                    nextActionEnabled: $fillup.isValid)
                 
                 HStack{
                     Spacer()

@@ -32,6 +32,12 @@ class Car: ObservableObject, Identifiable {
     @Published
     var fillups = [Fillup]()
     
+    func addNewFillup(_ fillup: Fillup){
+        fillups.append(fillup)
+        
+        // TODO store in cloud
+    }
+    
     static var carForTest: Car = {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM-yyyy"

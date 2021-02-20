@@ -12,16 +12,19 @@ class TempFillup: ObservableObject {
     
     private var id: UUID
 
-    let dateFormatter: DateFormatter = {
+    private let dateFormatter: DateFormatter = {
        let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM-yyyy HH:mm"
         return formatter
     }()
     
-    init(){
+    init(car: Car){
+        self.car = car
         id = UUID()
         date = dateFormatter.string(from: Date())
     }
+    
+    let car: Car
     
     @Published var date: String { didSet { validate() } }
     @Published var odometer: String = "" { didSet { validate() } }
@@ -31,8 +34,9 @@ class TempFillup: ObservableObject {
     @Published var isValid = false
     
     func save() {
-        selection = nil
-        print("Saving the things!")
+        guard let fillup = fillup else { return }
+        
+        car.addNewFillup(fillup)
     }
     
     private func validate(){
