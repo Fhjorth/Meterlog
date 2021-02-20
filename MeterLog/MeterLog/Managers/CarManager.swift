@@ -29,10 +29,19 @@ class Car: ObservableObject, Identifiable {
     init(id: UUID, name: String) {
         self.id = id
         self.name = name
+        
     }
     
     @Published
-    var fillups = [Fillup]()
+    var fillups = [Fillup]() {
+        didSet {
+            odometers = fillups.map { f in
+                Double(f.odometer)
+            }
+        }
+    }
+    @Published
+    var odometers = [Double]()
     
     func addNewFillup(_ fillup: Fillup){
         fillups.append(fillup)
