@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		2F822D0A25E0491E00B3C5A8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0925E0491E00B3C5A8 /* GraphView.swift */; };
 		2F822D1025E0498F00B3C5A8 /* AddCarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0F25E0498F00B3C5A8 /* AddCarView.swift */; };
 		2F822D1825E049D500B3C5A8 /* FillupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D1725E049D500B3C5A8 /* FillupView.swift */; };
+		2F822D2025E1327D00B3C5A8 /* GraphContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D1F25E1327D00B3C5A8 /* GraphContainer.swift */; };
+		2F822D2625E138E500B3C5A8 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 2F822D2525E138E500B3C5A8 /* SwiftUICharts */; };
 		2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA0B59925E03867005E700D /* MeterLogApp.swift */; };
 		2FA0B59E25E0386A005E700D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B59D25E0386A005E700D /* Assets.xcassets */; };
 		2FA0B5A125E0386A005E700D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FA0B5A025E0386A005E700D /* Preview Assets.xcassets */; };
@@ -48,6 +50,7 @@
 		2F822D0925E0491E00B3C5A8 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		2F822D0F25E0498F00B3C5A8 /* AddCarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCarView.swift; sourceTree = "<group>"; };
 		2F822D1725E049D500B3C5A8 /* FillupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillupView.swift; sourceTree = "<group>"; };
+		2F822D1F25E1327D00B3C5A8 /* GraphContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphContainer.swift; sourceTree = "<group>"; };
 		2FA0B59625E03867005E700D /* MeterLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeterLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FA0B59925E03867005E700D /* MeterLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeterLogApp.swift; sourceTree = "<group>"; };
 		2FA0B59B25E03867005E700D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F822D2625E138E500B3C5A8 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +120,7 @@
 				2F822D0925E0491E00B3C5A8 /* GraphView.swift */,
 				2F822D0F25E0498F00B3C5A8 /* AddCarView.swift */,
 				2F822D1725E049D500B3C5A8 /* FillupView.swift */,
+				2F822D1F25E1327D00B3C5A8 /* GraphContainer.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -213,6 +218,9 @@
 			dependencies = (
 			);
 			name = MeterLog;
+			packageProductDependencies = (
+				2F822D2525E138E500B3C5A8 /* SwiftUICharts */,
+			);
 			productName = MeterLog;
 			productReference = 2FA0B59625E03867005E700D /* MeterLog.app */;
 			productType = "com.apple.product-type.application";
@@ -284,6 +292,9 @@
 				Base,
 			);
 			mainGroup = 2FA0B58D25E03867005E700D;
+			packageReferences = (
+				2F822D2425E138E500B3C5A8 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 2FA0B59725E03867005E700D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -334,6 +345,7 @@
 				C5E8C05425E10F3900E60D5E /* HtmyTestView.swift in Sources */,
 				2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */,
 				2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */,
+				2F822D2025E1327D00B3C5A8 /* GraphContainer.swift in Sources */,
 				2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */,
 				C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */,
 				2F822D0A25E0491E00B3C5A8 /* GraphView.swift in Sources */,
@@ -650,6 +662,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2F822D2425E138E500B3C5A8 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F822D2525E138E500B3C5A8 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F822D2425E138E500B3C5A8 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2FA0B58E25E03867005E700D /* Project object */;
 }
