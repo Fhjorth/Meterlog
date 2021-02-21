@@ -6,52 +6,46 @@
 //
 
 import Foundation
+import Firebase
 
 class Car: ObservableObject, Identifiable {
     var id: UUID
     @Published var name: String = ""
     
+    var database: Firestore?
+    
     init(id: UUID, name: String) {
         self.id = id
         self.name = name
-        
     }
     
-    @Published
-    var fillups = [Fillup]() {
+    @Published var fillups = [Fillup]() {
         didSet {
             odometers = fillups.map { f in
                 Double(f.odometer)
             }
         }
     }
-    @Published
-    var odometers = [Double]()
+    
+    @Published var odometers = [Double]()
     
     func addNewFillup(_ fillup: Fillup){
         fillups.append(fillup)
 
-        // TODO store in cloud
+        guard let database = database else { return }
+        database.addFillup(fillup, for: self)
     }
     
     func updateFillup(_ fillup: Fillup){
         guard let index = fillups.firstIndex(where: { f in f.id == fillup.id }) else {
-            
-            print(fillup.id)
-            print("======")
-            print(fillups.map { f in "\(f.id)"}.joined(separator: "\n"))
-            
             return
         }
-        
-        objectWillChange.send()
         
         fillups.remove(at: index)
         fillups.insert(fillup, at: index)
         
-        objectWillChange.send()
-        
-        // TODO update in cloud
+        guard let database = database else { return }
+        database.addFillup(fillup, for: self)
     }
     
     static var carForTest: Car = {
