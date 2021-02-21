@@ -16,20 +16,61 @@ class AppManager: ObservableObject {
     @Published
     var user: User?
     
+    private var database: Firestore?
+    
+    private var subscription: ListenerRegistration?
+    
     func initForReal() {
         FirebaseApp.configure()
-        
-        let db = Firestore.firestore()
-        
+        database = Firestore.firestore()
+    
         Auth.auth().signIn { (user) in
             self.user = user
             
-            guard let user = user else { return }
+            guard let user = user,
+                  let database = self.database else { return }
             
-            db.getCars(for: user) { (cars) in
-                print(cars)
+            self.subscription = database.carCollection(for: user).addSnapshotListener { (snapshot, err) in
+                guard let snapshot = snapshot,
+                      err == nil else {
+                    print("Failed subscribing: \(err?.localizedDescription ?? "No message")")
+                    return
+                }
                 
-                self.cars = cars
+                let carIds = snapshot.documents.map { d in d.documentID }
+                createCars(database: database, carIds: carIds) { (cars) in
+                    self.cars = cars
+                }
+            }
+        }
+        
+        func createCars(database: Firestore, carIds: [String], completion: @escaping ([Car]) -> ()) {
+            var cars = [Car]()
+            
+            var remaining = carIds.count
+            
+            func done() {
+                remaining -= 1
+                if remaining <= 0 {
+                    completion(cars)
+                }
+            }
+            
+            for carId in carIds {
+                database.carDocRef(for: carId).getDocument { (snapshot, err) in
+                    guard let snapshot = snapshot,
+                          err == nil else {
+                        print("Failed getting car: \(err?.localizedDescription ?? "No message")")
+                        done()
+                        return
+                    }
+                    
+                    if let car = Car.from(snapshot) {
+                        cars.append(car)
+                    }
+                    
+                    done()
+                }
             }
         }
     }
