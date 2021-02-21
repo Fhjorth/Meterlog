@@ -44,7 +44,7 @@ extension Firestore {
                 print("Id: \(id)")
                 print("Name: \(name)")
                 
-                CarManager.getFillups(database: database, id: id.uuidString){ fillups in
+                self.getFillups(id: id.uuidString){ fillups in
                     print("Fillups: \(fillups)")
                     
                     let car = Car(id: id, name: name)
@@ -60,8 +60,8 @@ extension Firestore {
         }
     }
 
-    private static func getFillups(database: Firestore, id: String, completion: @escaping ([Fillup]) -> ()) {
-        database.collection("cars/\(id)/Fillups").getDocuments { (fillupSnap, fillupErr) in
+    func getFillups(id: String, completion: @escaping ([Fillup]) -> ()) {
+        self.collection("cars/\(id)/Fillups").getDocuments { (fillupSnap, fillupErr) in
             if let fillupErr = fillupErr {
                 print("Firestore-error: \(fillupErr)")
                 completion([])

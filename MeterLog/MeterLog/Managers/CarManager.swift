@@ -18,7 +18,7 @@ class CarManager: ObservableObject {
         
         let db = Firestore.firestore()
         
-        CarManager.getCars(database: db) { (cars) in
+        db.getCars() { (cars) in
             print(cars)
             
             self.cars = cars
