@@ -49,4 +49,13 @@ class AppManager: ObservableObject {
         carManager.initForTest()
         return carManager
     }()
+    
+    static func updateOrMakeNewCar(car: Car) {
+        var carToBeUpdates = managerForTest.cars.filter { $0.id == car.id}.first
+        if carToBeUpdates == nil {
+            managerForTest.cars.append(car)
+        } else {
+            carToBeUpdates = car
+        }
+    }
 }

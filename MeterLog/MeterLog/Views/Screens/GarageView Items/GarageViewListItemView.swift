@@ -20,6 +20,7 @@ struct GarageViewListItemView: View {
                 .foregroundColor(.white)
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 120, height: 100)
+                .frame(maxWidth: 120, maxHeight: 100)
                 .clipped()
                 .cornerRadius(20.0)
                 .padding(20)

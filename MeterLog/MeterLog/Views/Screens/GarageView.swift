@@ -25,6 +25,7 @@ struct GarageView: View {
             List(appManager.cars) {car in
                 ZStack {
                     GarageViewListItemView(carName: car.name, carKilometers: String(car.fillups.last?.odometer ?? 0))
+                    
                     NavigationLink(destination: CarDetailView(car: car)){
                         
                     }
