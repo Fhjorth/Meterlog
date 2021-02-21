@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddCarView: View {
+    @EnvironmentObject var appManager: AppManager
     @Binding var haveToPresent: Bool
     @ObservedObject var car: Car
     
@@ -31,8 +32,7 @@ struct AddCarView: View {
                 Spacer()
                 
                 Button(action: {
-//                    AppManager.managerForTest.cars.append(car)
-                    AppManager.updateOrMakeNewCar(car: car)
+                    appManager.updateOrMakeNewCar(car: car)
                     self.haveToPresent.toggle()
                 }) {
                     Text("Save")

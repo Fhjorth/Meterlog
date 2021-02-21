@@ -158,11 +158,9 @@ extension Firestore {
             .document(car.id.uuidString).setData([:])
     }
     
-//    func updateCar(car: Car, for user: User){
-//
-//    }
-    
-    
+    func removeCar(car: Car, for user: User) {
+        carCollection(for: user).document(car.id.uuidString).delete()
+    }    
 }
 
 extension Car {

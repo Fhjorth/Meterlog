@@ -22,19 +22,21 @@ struct GarageView: View {
     
     var body: some View {
         NavigationView {
-            List(appManager.cars) {car in
-                ZStack {
-                    GarageViewListItemView(car: car)
-                    
-                    NavigationLink(destination: CarDetailView(car: car)){
+            List {
+                ForEach(appManager.cars, id: \.id) {car in
+                    ZStack {
+                        GarageViewListItemView(car: car)
                         
+                        NavigationLink(destination: CarDetailView(car: car)){
+                            
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .opacity(0)
                     }
-                    .buttonStyle(PlainButtonStyle())
-                    .opacity(0)
+                }.onDelete { (indexSet) in
+                    appManager.removeCar(at: indexSet)
                 }
             }
-            //            .listStyle(SidebarListStyle())
-//            .colorMultiply(Color(red: 0.09, green: 0.11, blue: 0.15)).padding()
             .navigationBarTitle("MeterMan", displayMode: .inline)
             .navigationBarItems(trailing: HStack {
                 Button(action: {
