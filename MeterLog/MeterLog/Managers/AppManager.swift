@@ -13,15 +13,24 @@ class AppManager: ObservableObject {
     @Published
     var cars = [Car]()
     
+    @Published
+    var user: User?
+    
     func initForReal() {
         FirebaseApp.configure()
         
         let db = Firestore.firestore()
         
-        db.getCars() { (cars) in
-            print(cars)
+        Auth.auth().signIn { (user) in
+            self.user = user
             
-            self.cars = cars
+            guard let user = user else { return }
+            
+            db.getCars(for: user) { (cars) in
+                print(cars)
+                
+                self.cars = cars
+            }
         }
     }
     

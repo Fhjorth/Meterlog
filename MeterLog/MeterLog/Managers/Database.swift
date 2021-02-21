@@ -8,52 +8,91 @@
 import Foundation
 import Firebase
 
+extension Auth {
+    func signIn(completion: @escaping (User?) -> ()) {
+        self.signInAnonymously { (result, err) in
+            if let err = err {
+                print("Error signing in: \(err.localizedDescription)")
+                completion(nil)
+                return
+            }
+            
+            guard let result = result else {
+                print("Error signing in!")
+                completion(nil)
+                return
+            }
+            
+            completion(result.user)
+        }
+    }
+}
+
 extension Firestore {
-    func getCars(completion: @escaping ([Car]) -> ()) {
-        self.collection("cars").getDocuments { (carsSnap, carsErr) in
-            if let carsErr = carsErr {
-                print("Firestore-error: \(carsErr)")
+    func getCars(for user: User, completion: @escaping ([Car]) -> ()) {
+        
+        self.collection("users/\(user.uid)/cars").getDocuments { (carIdSnap, carIdErr) in
+            if let carIdErr = carIdErr {
+                print("Error getting cars for user: \(carIdErr.localizedDescription)")
                 completion([])
                 return
             }
             
-            guard let carsSnap = carsSnap else {
-                print("Firestore-error!")
+            guard let carIdSnap = carIdSnap else {
+                print("Error getting cars for user!")
                 completion([])
                 return
             }
             
-            var finished = 0
-            var cars = [Car]()
-            
-            for carDoc in carsSnap.documents {
-                
-                let data = carDoc.data()
-                
-                guard let id = UUID(uuidString: carDoc.documentID),
-                      let name = data["name"] as? String else {
-                    
-                    finished += 1
-                    if finished == carsSnap.count {
-                        completion(cars)
-                    }
-                    
+            let availableCars = carIdSnap.documents.map { d in d.documentID }
+        
+            self.collection("cars").getDocuments { (carsSnap, carsErr) in
+                if let carsErr = carsErr {
+                    print("Firestore-error: \(carsErr.localizedDescription)")
+                    completion([])
                     return
                 }
                 
-                print("Id: \(id)")
-                print("Name: \(name)")
+                guard let carsSnap = carsSnap else {
+                    print("Firestore-error!")
+                    completion([])
+                    return
+                }
                 
-                self.getFillups(id: id.uuidString){ fillups in
-                    print("Fillups: \(fillups)")
+                var finished = 0
+                var cars = [Car]()
+                
+                for carDoc in carsSnap.documents {
                     
-                    let car = Car(id: id, name: name)
-                    car.fillups = fillups
-                    cars.append(car)
+                    let data = carDoc.data()
                     
-                    finished += 1
-                    if finished == carsSnap.count {
-                        completion(cars)
+                    guard availableCars.contains(carDoc.documentID),
+                          let id = UUID(uuidString: carDoc.documentID),
+                          let name = data["name"] as? String
+                          else {
+                        
+                        finished += 1
+                        if finished == carsSnap.count {
+                            completion(cars)
+                        }
+                        
+                        return
+                    }
+                    
+                    print("Id: \(id)")
+                    print("Name: \(name)")
+                    
+                    self.getFillups(id: id.uuidString){ fillups in
+                        print("Fillups: \(fillups)")
+                        
+                        let car = Car(id: id, name: name)
+                        car.fillups = fillups
+                        cars.append(car)
+                        
+                        finished += 1
+                        if finished == carsSnap.count {
+                            completion(cars)
+                        }
                     }
                 }
             }
@@ -63,7 +102,7 @@ extension Firestore {
     func getFillups(id: String, completion: @escaping ([Fillup]) -> ()) {
         self.collection("cars/\(id)/Fillups").getDocuments { (fillupSnap, fillupErr) in
             if let fillupErr = fillupErr {
-                print("Firestore-error: \(fillupErr)")
+                print("Firestore-error: \(fillupErr.localizedDescription)")
                 completion([])
                 return
             }
