@@ -24,7 +24,7 @@ struct GraphView: View {
             VStack{
                 List{
                     Text("Car model: \(car.name)")
-                    Text("Total Fuel price: ")
+                    Text("Total Fuel price: \(car.totalPrices)")
                     Text("Best ride: ")
                 }
             }
