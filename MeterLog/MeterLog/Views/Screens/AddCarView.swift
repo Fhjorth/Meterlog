@@ -31,7 +31,8 @@ struct AddCarView: View {
                 Spacer()
                 
                 Button(action: {
-                    AppManager.managerForTest.cars.append(car)
+//                    AppManager.managerForTest.cars.append(car)
+                    AppManager.updateOrMakeNewCar(car: car)
                     self.haveToPresent.toggle()
                 }) {
                     Text("Save")

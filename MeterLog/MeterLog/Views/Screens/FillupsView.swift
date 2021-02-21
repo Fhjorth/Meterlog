@@ -12,8 +12,14 @@ struct FillupsView: View {
     
     var body: some View {
         List(car.fillups){ fillup in
-            NavigationLink(destination: FillupView(car: car, fillupId: fillup.id)){
-                Text("\(fillup.odometer)")
+            ZStack {
+                FillupViewListItem(fillup: fillup)
+                
+                NavigationLink(destination: FillupView(car: car, fillupId: fillup.id)){
+                    
+                }
+                .buttonStyle(PlainButtonStyle())
+                .opacity(0)
             }
         }
     }

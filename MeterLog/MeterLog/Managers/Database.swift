@@ -144,6 +144,21 @@ extension Firestore {
             .document(fillup.id.uuidString)
             .setData(fillup.databaseData)
     }
+    
+    func addCar(car: Car, for user: User) {
+        self.collection("cars")
+            .document(car.id.uuidString)
+            .setData(car.databaseData)
+        
+        carCollection(for: user)
+            .document(car.id.uuidString)
+    }
+    
+//    func updateCar(car: Car, for user: User){
+//
+//    }
+    
+    
 }
 
 extension Fillup {
@@ -153,6 +168,14 @@ extension Fillup {
             "odometer" : odometer,
             "price" : literPrice,
             "volume" : volume
+        ]
+    }
+}
+
+extension Car {
+    var databaseData: [String : Any] {
+        return [
+            "name" : name
         ]
     }
 }
