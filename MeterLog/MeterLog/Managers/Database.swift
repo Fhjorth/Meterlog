@@ -29,9 +29,18 @@ extension Auth {
 }
 
 extension Firestore {
+    func fillupCollection(for car: Car) -> CollectionReference {
+        let id = car.id.uuidString
+        return self.collection("cars/\(id)/Fillups")
+    }
+    
+    func carCollection(for user: User) -> CollectionReference {
+        return self.collection("users/\(user.uid)/cars")
+    }
+    
     func getCars(for user: User, completion: @escaping ([Car]) -> ()) {
         
-        self.collection("users/\(user.uid)/cars").getDocuments { (carIdSnap, carIdErr) in
+        carCollection(for: user).getDocuments { (carIdSnap, carIdErr) in
             if let carIdErr = carIdErr {
                 print("Error getting cars for user: \(carIdErr.localizedDescription)")
                 completion([])
@@ -79,14 +88,11 @@ extension Firestore {
                         return
                     }
                     
-                    print("Id: \(id)")
-                    print("Name: \(name)")
+                    let car = Car(id: id, name: name)
                     
-                    self.getFillups(id: id.uuidString){ fillups in
-                        print("Fillups: \(fillups)")
-                        
-                        let car = Car(id: id, name: name)
+                    self.getFillups(for: car){ fillups in
                         car.fillups = fillups
+                        car.database = self
                         cars.append(car)
                         
                         finished += 1
@@ -99,8 +105,9 @@ extension Firestore {
         }
     }
 
-    func getFillups(id: String, completion: @escaping ([Fillup]) -> ()) {
-        self.collection("cars/\(id)/Fillups").getDocuments { (fillupSnap, fillupErr) in
+    func getFillups(for car: Car, completion: @escaping ([Fillup]) -> ()) {
+        
+        fillupCollection(for: car).getDocuments { (fillupSnap, fillupErr) in
             if let fillupErr = fillupErr {
                 print("Firestore-error: \(fillupErr.localizedDescription)")
                 completion([])
@@ -130,5 +137,22 @@ extension Firestore {
             
             completion(fillups)
         }
+    }
+    
+    func addFillup(_ fillup: Fillup, for car: Car) {
+        fillupCollection(for: car)
+            .document(fillup.id.uuidString)
+            .setData(fillup.databaseData)
+    }
+}
+
+extension Fillup {
+    var databaseData: [String : Any] {
+        return [
+            "date" : Timestamp(date: date),
+            "odometer" : odometer,
+            "price" : literPrice,
+            "volume" : volume
+        ]
     }
 }
