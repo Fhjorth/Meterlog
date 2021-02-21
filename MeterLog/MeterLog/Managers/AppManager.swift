@@ -16,21 +16,34 @@ class AppManager: ObservableObject {
     @Published
     var user: User?
     
+    private var database: Firestore?
+    
     func initForReal() {
         FirebaseApp.configure()
-        
-        let db = Firestore.firestore()
-        
+        database = Firestore.firestore()
+    
         Auth.auth().signIn { (user) in
             self.user = user
             
-            guard let user = user else { return }
+            guard let user = user,
+                  let database = self.database else { return }
             
-            db.getCars(for: user) { (cars) in
-                print(cars)
+            database.carCollection(for: user).addSnapshotListener { (snapshot, err) in
+                guard let snapshot = snapshot,
+                      err == nil else {
+                    print("Failed subscribing: \(err?.localizedDescription ?? "No message")")
+                    return
+                }
                 
-                self.cars = cars
+                let carIds = snapshot.documents.map { d in d.documentID }
+                print(carIds)
             }
+            
+//            database.getCars(for: user) { cars in
+//                self.cars = cars
+//            }
+            
+            
         }
     }
     

@@ -146,6 +146,10 @@ extension Firestore {
     }
 }
 
+extension Car {
+    
+}
+
 extension Fillup {
     var databaseData: [String : Any] {
         return [
