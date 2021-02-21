@@ -176,6 +176,20 @@ extension Car {
 }
 
 extension Fillup {
+    static func from(_ snapshot: DocumentSnapshot) -> Fillup? {
+        guard let data = snapshot.data(),
+              let id = UUID(uuidString: snapshot.documentID),
+              let date = (data["date"] as? Timestamp)?.dateValue(),
+              let odometer = data["odometer"] as? Int,
+              let volume = data["volume"] as? Double,
+              let price = data["volume"] as? Double
+            else {
+                return nil
+            }
+
+        return Fillup(id: id, date: date, odometer: odometer, volume: Float(volume), literPrice: Float(price))
+    }
+    
     var databaseData: [String : Any] {
         return [
             "date" : Timestamp(date: date),

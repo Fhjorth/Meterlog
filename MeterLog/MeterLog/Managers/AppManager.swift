@@ -22,11 +22,14 @@ class AppManager: ObservableObject {
     
     func initForReal() {
         FirebaseApp.configure()
-        database = Firestore.firestore()
     
         Auth.auth().signIn { (user) in
             self.user = user
-            
+            self.database = Firestore.firestore()
+            subscribe()
+        }
+        
+        func subscribe() {
             guard let user = user,
                   let database = self.database else { return }
             
@@ -39,7 +42,9 @@ class AppManager: ObservableObject {
                 
                 let carIds = snapshot.documents.map { d in d.documentID }
                 createCars(database: database, carIds: carIds) { (cars) in
+                    self.cars.forEach{ c in c.unsubscribe() }
                     self.cars = cars
+                    self.cars.forEach{ c in c.database = database }
                 }
             }
         }

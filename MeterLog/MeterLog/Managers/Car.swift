@@ -9,10 +9,15 @@ import Foundation
 import Firebase
 
 class Car: ObservableObject, Identifiable {
+    
+    private var subscriptions: [ListenerRegistration] = []
+    
     var id: UUID
     @Published var name: String = ""
     
-    var database: Firestore?
+    var database: Firestore? {
+        didSet { subscribe() }
+    }
     
     init(id: UUID, name: String) {
         self.id = id
@@ -47,6 +52,42 @@ class Car: ObservableObject, Identifiable {
         guard let database = database else { return }
         database.addFillup(fillup, for: self)
     }
+    
+    func subscribe() {
+        // TODO Fields
+        
+        
+        
+        
+        guard let database = self.database else { return }
+        
+        let subscription = database.fillupCollection(for: self).addSnapshotListener { (snapshot, err) in
+            guard let snapshot = snapshot,
+                  err == nil else {
+                print("Failed subscribing: \(err?.localizedDescription ?? "No message")")
+                return
+            }
+            
+            let fillups = snapshot.documents.compactMap { d in
+                Fillup.from(d)
+            }
+            
+            // self.fillups.forEach{ f in f.unsubscribe() }
+            self.fillups = fillups
+//            self.fillups.forEach{ f in f.subscribe() }
+        }
+        
+        subscriptions.append(subscription)
+    }
+    
+    func unsubscribe() {
+        subscriptions.forEach { s in s.remove() }
+        subscriptions = []
+    }
+}
+
+// MARK: Test
+extension Car {
     
     static var carForTest: Car = {
         let formatter = DateFormatter()
