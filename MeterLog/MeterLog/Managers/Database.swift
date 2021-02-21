@@ -89,7 +89,7 @@ extension Fillup {
                 return nil
             }
 
-        return Fillup(id: id, date: date, odometer: odometer, volume: Float(volume), literPrice: Float(price))
+        return Fillup(id: id, date: date, odometer: odometer, volume: Float(volume), price: Float(price))
     }
     
     var databaseData: [String : Any] {

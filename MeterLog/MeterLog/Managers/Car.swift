@@ -79,9 +79,9 @@ class Car: ObservableObject, Identifiable {
                 Fillup.from(d)
             }
             
-            // self.fillups.forEach{ f in f.unsubscribe() }
+            self.fillups.forEach{ f in f.unsubscribe() }
             self.fillups = fillups
-//            self.fillups.forEach{ f in f.subscribe() }
+            self.fillups.forEach{ f in f.subscribe() }
         }
         
         subscriptions.append(carSubscription)
@@ -103,12 +103,12 @@ extension Car {
         
         let testCar = Car(id: UUID(), name: "VW Up!")
         testCar.fillups.append(contentsOf: [
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 12500, volume: 32.1, literPrice: 10.59),
-            Fillup(id: UUID(), date: formatter.date(from: "24/01-2021")!, odometer: 12760, volume: 14.6, literPrice: 10.14),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13005, volume: 12.2, literPrice: 10.32),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13666, volume: 22.1, literPrice: 11.02),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13989, volume: 54.6, literPrice: 9.59),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 14444, volume: 7.6, literPrice: 10.08),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 12500, volume: 32.1, price: 10.59),
+            Fillup(id: UUID(), date: formatter.date(from: "24/01-2021")!, odometer: 12760, volume: 14.6, price: 10.14),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13005, volume: 12.2, price: 10.32),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13666, volume: 22.1, price: 11.02),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13989, volume: 54.6, price: 9.59),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 14444, volume: 7.6, price: 10.08),
         ])
         return testCar
     }()
