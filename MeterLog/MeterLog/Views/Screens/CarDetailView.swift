@@ -16,7 +16,7 @@ struct CarDetailView: View {
     private var addingFillup = false
     
     
-    var car: Car
+    @ObservedObject var car: Car
     
     
     var body: some View {
@@ -48,7 +48,7 @@ struct CarDetailView: View {
                 
             })
             .sheet(isPresented: $editingCar, content: {
-                AddCarView(haveToPresent: .constant(true), car: car)
+                AddCarView(haveToPresent: $editingCar, car: car)
             })
             
             Button(action: {

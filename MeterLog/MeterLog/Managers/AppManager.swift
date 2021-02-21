@@ -51,11 +51,14 @@ class AppManager: ObservableObject {
     }()
     
     static func updateOrMakeNewCar(car: Car) {
-        var carToBeUpdates = managerForTest.cars.filter { $0.id == car.id}.first
-        if carToBeUpdates == nil {
-            managerForTest.cars.append(car)
-        } else {
-            carToBeUpdates = car
-        }
+        let db = Firestore.firestore()
+        db.addCar(car: car, for: managerForReal.user!)
+       
+//        var carToBeUpdates = managerForTest.cars.filter { $0.id == car.id}.first
+//        if carToBeUpdates == nil {
+//            managerForTest.cars.append(car)
+//        } else {
+//            carToBeUpdates = car
+//        }
     }
 }
