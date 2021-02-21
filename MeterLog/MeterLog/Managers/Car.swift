@@ -24,14 +24,25 @@ class Car: ObservableObject, Identifiable {
             odometers = fillups.map { f in
                 Double(f.odometer)
             }
+            
+            var totalPrices = Float(0)
+            fillups.forEach { f in
+                totalPrices += f.volume * f.literPrice
+            }
+            self.totalPrices = totalPrices
+            
+            
         }
     }
     
     @Published var odometers = [Double]()
     
+    @Published var totalPrices = Float()
+    
+    
     func addNewFillup(_ fillup: Fillup){
         fillups.append(fillup)
-
+        
         guard let database = database else { return }
         database.addFillup(fillup, for: self)
     }
@@ -63,4 +74,5 @@ class Car: ObservableObject, Identifiable {
         ])
         return testCar
     }()
+    
 }
