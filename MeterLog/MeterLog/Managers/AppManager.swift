@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-class CarManager: ObservableObject {
+class AppManager: ObservableObject {
     
     @Published
     var cars = [Car]()
@@ -29,14 +29,14 @@ class CarManager: ObservableObject {
         cars = [Car.carForTest]
     }
     
-    static var carManagerForReal: CarManager = {
-        let carManager = CarManager()
+    static var managerForReal: AppManager = {
+        let carManager = AppManager()
         carManager.initForReal()
         return carManager
     }()
     
-    static var carManagerForTest: CarManager = {
-        let carManager = CarManager()
+    static var managerForTest: AppManager = {
+        let carManager = AppManager()
         carManager.initForTest()
         return carManager
     }()

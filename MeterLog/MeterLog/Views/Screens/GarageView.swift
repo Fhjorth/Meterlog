@@ -10,7 +10,7 @@ import SwiftUI
 struct GarageView: View {
     
     @EnvironmentObject
-    var carManager: CarManager
+    var appManager: AppManager
     
     @State private var addingNewCar = false
     
@@ -22,7 +22,7 @@ struct GarageView: View {
     
     var body: some View {
         NavigationView {
-            List(carManager.cars) {car in
+            List(appManager.cars) {car in
                 ZStack {
                     GarageViewListItemView(carName: car.name, carKilometers: String(car.fillups.last?.odometer ?? 0))
                     NavigationLink(destination: CarDetailView(car: car)){
@@ -54,6 +54,6 @@ struct GarageView: View {
 struct GarageView_Previews: PreviewProvider {
     static var previews: some View {
         GarageView()
-            .environmentObject(CarManager.carManagerForTest)
+            .environmentObject(AppManager.managerForTest)
     }
 }

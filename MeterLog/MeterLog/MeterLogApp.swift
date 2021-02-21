@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct MeterLogApp: App {
-    let carManager = CarManager.carManagerForReal
+    let appManager = AppManager.managerForReal
     
     var isHtmy = false
     
@@ -22,7 +22,7 @@ struct MeterLogApp: App {
             else
             {
                 GarageView()
-                    .environmentObject(carManager)
+                    .environmentObject(appManager)
             }
         }
     }

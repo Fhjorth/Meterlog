@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CF225E03A0E00B3C5A8 /* CarManager.swift */; };
+		2F822CF325E03A0E00B3C5A8 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CF225E03A0E00B3C5A8 /* AppManager.swift */; };
 		2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */; };
 		2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0425E0455400B3C5A8 /* CarDetailView.swift */; };
 		2F822D0A25E0491E00B3C5A8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0925E0491E00B3C5A8 /* GraphView.swift */; };
@@ -52,7 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F822CF225E03A0E00B3C5A8 /* CarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
+		2F822CF225E03A0E00B3C5A8 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillupsView.swift; sourceTree = "<group>"; };
 		2F822D0425E0455400B3C5A8 /* CarDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailView.swift; sourceTree = "<group>"; };
 		2F822D0925E0491E00B3C5A8 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		2F822CF125E039E900B3C5A8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				2F822CF225E03A0E00B3C5A8 /* CarManager.swift */,
+				2F822CF225E03A0E00B3C5A8 /* AppManager.swift */,
 				C5657CFE25E277770011CEFF /* Car.swift */,
 				C5657D0325E277950011CEFF /* Fillup.swift */,
 				C5657D0825E277D60011CEFF /* Database.swift */,
@@ -372,7 +372,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA0B5CA25E0391B005E700D /* GarageView.swift in Sources */,
-				2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */,
+				2F822CF325E03A0E00B3C5A8 /* AppManager.swift in Sources */,
 				C5657CFF25E277770011CEFF /* Car.swift in Sources */,
 				C5657D0425E277950011CEFF /* Fillup.swift in Sources */,
 				C5657CE525E18AA80011CEFF /* BottomSheet.swift in Sources */,
