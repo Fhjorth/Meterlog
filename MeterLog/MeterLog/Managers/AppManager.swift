@@ -96,15 +96,18 @@ class AppManager: ObservableObject {
         return carManager
     }()
     
-    static func updateOrMakeNewCar(car: Car) {
-        let db = Firestore.firestore()
-        db.addCar(car: car, for: managerForReal.user!)
-       
-//        var carToBeUpdates = managerForTest.cars.filter { $0.id == car.id}.first
-//        if carToBeUpdates == nil {
-//            managerForTest.cars.append(car)
-//        } else {
-//            carToBeUpdates = car
-//        }
+    func updateOrMakeNewCar(car: Car) {
+        guard let db = self.database, let user = user else { return }
+        
+        db.addCar(car: car, for: user)
+    }
+    
+    func removeCar(at index: IndexSet) {
+        guard let db = self.database, let user = user else { return }
+        
+        for i in index {
+            let car = cars.remove(at: i)
+            db.removeCar(car: car, for: user)
+        }
     }
 }

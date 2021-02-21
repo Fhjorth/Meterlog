@@ -28,9 +28,7 @@ struct FillupViewListItem: View {
                     .padding(.trailing, 20)
             }
         }.frame(maxWidth: .infinity)
-        .background(gradient)
-        .cornerRadius(25)
-        
+        .background(gradient)        
     }
 }
 
