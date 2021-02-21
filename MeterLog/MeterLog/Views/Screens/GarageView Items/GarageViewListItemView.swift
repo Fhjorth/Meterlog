@@ -29,7 +29,7 @@ struct GarageViewListItemView: View {
                 Text(car.name)
                     .font(.custom("HelveticaNeue-Medium", size: 30))
                     .foregroundColor(.white)
-                Text("\(String(format: "%.2f", car.odometers.last!)) km")
+                Text("\(String(format: "%.2f", car.odometers.last ?? 0)) km")
                     .font(.custom("HelveticaNeue-Medium", size: 30))
                     .foregroundColor(.white)
                 

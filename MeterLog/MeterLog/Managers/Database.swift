@@ -29,6 +29,10 @@ extension Auth {
 }
 
 extension Firestore {
+    func carDocRef(for id: String) -> DocumentReference {
+        self.collection("cars").document(id)
+    }
+    
     func fillupCollection(for car: Car) -> CollectionReference {
         let id = car.id.uuidString
         return self.collection("cars/\(id)/Fillups")
@@ -151,7 +155,7 @@ extension Firestore {
             .setData(car.databaseData)
         
         carCollection(for: user)
-            .document(car.id.uuidString)
+            .document(car.id.uuidString).setData([:])
     }
     
 //    func updateCar(car: Car, for user: User){
@@ -162,7 +166,13 @@ extension Firestore {
 }
 
 extension Car {
-    
+    static func from(_ snapshot: DocumentSnapshot) -> Car? {
+        guard let data = snapshot.data(),
+              let id = UUID(uuidString: snapshot.documentID),
+              let name = data["name"] as? String else { return nil }
+        
+        return Car(id: id, name: name)
+    }
 }
 
 extension Fillup {
