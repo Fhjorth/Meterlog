@@ -24,9 +24,12 @@
 		B368CFF425E147E600C2DFBC /* GarageViewListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368CFF325E147E600C2DFBC /* GarageViewListItemView.swift */; };
 		C5657CE525E18AA80011CEFF /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657CE425E18AA80011CEFF /* BottomSheet.swift */; };
 		C5657CEA25E18E820011CEFF /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657CE925E18E820011CEFF /* RoundedCorners.swift */; };
-		C5657CEF25E19DE70011CEFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5657CEE25E19DE70011CEFF /* GoogleService-Info.plist */; };
 		C5657CF525E1AD1C0011CEFF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C5657CF425E1AD1C0011CEFF /* FirebaseAuth */; };
 		C5657CF725E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C5657CF625E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta */; };
+		C5657CFF25E277770011CEFF /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657CFE25E277770011CEFF /* Car.swift */; };
+		C5657D0425E277950011CEFF /* Fillup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657D0325E277950011CEFF /* Fillup.swift */; };
+		C5657D0925E277D60011CEFF /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657D0825E277D60011CEFF /* Database.swift */; };
+		C5657D1625E279CA0011CEFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5657D1525E279CA0011CEFF /* GoogleService-Info.plist */; };
 		C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */; };
 		C5E8C05D25E13F6400E60D5E /* TempFillup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8C05C25E13F6400E60D5E /* TempFillup.swift */; };
 /* End PBXBuildFile section */
@@ -71,7 +74,10 @@
 		B368CFF325E147E600C2DFBC /* GarageViewListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewListItemView.swift; sourceTree = "<group>"; };
 		C5657CE425E18AA80011CEFF /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		C5657CE925E18E820011CEFF /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
-		C5657CEE25E19DE70011CEFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C5657CFE25E277770011CEFF /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		C5657D0325E277950011CEFF /* Fillup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fillup.swift; sourceTree = "<group>"; };
+		C5657D0825E277D60011CEFF /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		C5657D1525E279CA0011CEFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeInput.swift; sourceTree = "<group>"; };
 		C5E8C05C25E13F6400E60D5E /* TempFillup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFillup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				2F822CF225E03A0E00B3C5A8 /* CarManager.swift */,
+				C5657CFE25E277770011CEFF /* Car.swift */,
+				C5657D0325E277950011CEFF /* Fillup.swift */,
+				C5657D0825E277D60011CEFF /* Database.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -159,13 +168,13 @@
 		2FA0B59825E03867005E700D /* MeterLog */ = {
 			isa = PBXGroup;
 			children = (
+				C5657D1525E279CA0011CEFF /* GoogleService-Info.plist */,
 				C5E8C05B25E13F5400E60D5E /* Data */,
 				2F822CFA25E03F4C00B3C5A8 /* Views */,
 				2F822CF125E039E900B3C5A8 /* Managers */,
 				2FA0B59925E03867005E700D /* MeterLogApp.swift */,
 				2FA0B59D25E0386A005E700D /* Assets.xcassets */,
 				2FA0B5A225E0386A005E700D /* Info.plist */,
-				C5657CEE25E19DE70011CEFF /* GoogleService-Info.plist */,
 				2FA0B59F25E0386A005E700D /* Preview Content */,
 			);
 			path = MeterLog;
@@ -337,7 +346,7 @@
 			files = (
 				2FA0B5A125E0386A005E700D /* Preview Assets.xcassets in Resources */,
 				2FA0B59E25E0386A005E700D /* Assets.xcassets in Resources */,
-				C5657CEF25E19DE70011CEFF /* GoogleService-Info.plist in Resources */,
+				C5657D1625E279CA0011CEFF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +373,8 @@
 			files = (
 				2FA0B5CA25E0391B005E700D /* GarageView.swift in Sources */,
 				2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */,
+				C5657CFF25E277770011CEFF /* Car.swift in Sources */,
+				C5657D0425E277950011CEFF /* Fillup.swift in Sources */,
 				C5657CE525E18AA80011CEFF /* BottomSheet.swift in Sources */,
 				2F822D1825E049D500B3C5A8 /* FillupView.swift in Sources */,
 				B368CFF425E147E600C2DFBC /* GarageViewListItemView.swift in Sources */,
@@ -373,6 +384,7 @@
 				2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */,
 				2F822D2025E1327D00B3C5A8 /* GraphContainer.swift in Sources */,
 				C5657CEA25E18E820011CEFF /* RoundedCorners.swift in Sources */,
+				C5657D0925E277D60011CEFF /* Database.swift in Sources */,
 				2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */,
 				C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */,
 				2F822D0A25E0491E00B3C5A8 /* GraphView.swift in Sources */,
