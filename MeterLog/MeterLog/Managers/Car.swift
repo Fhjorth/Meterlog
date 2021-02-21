@@ -54,14 +54,21 @@ class Car: ObservableObject, Identifiable {
     }
     
     func subscribe() {
-        // TODO Fields
-        
-        
-        
-        
         guard let database = self.database else { return }
         
-        let subscription = database.fillupCollection(for: self).addSnapshotListener { (snapshot, err) in
+        let carSubscription = database.carDocRef(for: id.uuidString).addSnapshotListener { (snapshot, err) in
+            guard let snapshot = snapshot,
+                  err == nil else {
+                print("Failed subscribing: \(err?.localizedDescription ?? "No message")")
+                return
+            }
+            
+            guard let updatedCar = Car.from(snapshot) else { return }
+            
+            self.name = updatedCar.name
+        }
+        
+        let fillupSubscription = database.fillupCollection(for: self).addSnapshotListener { (snapshot, err) in
             guard let snapshot = snapshot,
                   err == nil else {
                 print("Failed subscribing: \(err?.localizedDescription ?? "No message")")
@@ -77,7 +84,8 @@ class Car: ObservableObject, Identifiable {
 //            self.fillups.forEach{ f in f.subscribe() }
         }
         
-        subscriptions.append(subscription)
+        subscriptions.append(carSubscription)
+        subscriptions.append(fillupSubscription)
     }
     
     func unsubscribe() {
