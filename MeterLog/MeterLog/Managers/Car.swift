@@ -12,7 +12,46 @@ class Car: ObservableObject, Identifiable {
     var id: UUID
     @Published var name: String = ""
     
-    var database: Firestore?
+    private var subscriptions = [ListenerRegistration]()
+    
+    var database: Firestore? {
+        didSet {
+            guard let database = database else { return }
+            
+            subscriptions.append(contentsOf: subscribe(database: database))
+//
+//            database.collection("cars").document(id.uuidString).addSnapshotListener { (snapshot, err) in
+//                if let err = err {
+//                    print("Subscription failed: \(err.localizedDescription)")
+//                    return
+//                }
+//
+//                guard let snapshot = snapshot else {
+//                    print("Subscription failed!")
+//                    return
+//                }
+//
+//                guard let data = snapshot.data(),
+//                      let name = data["name"] as? String else { return }
+//
+//                self.name = name
+//            }
+//
+//            database.fillupCollection(for: self).addSnapshotListener { (snapshot, err) in
+//                if let err = err {
+//                    print("Fillup subscription failed: \(err.localizedDescription)")
+//                    return
+//                }
+//
+//                guard let snapshot = snapshot else {
+//                    print("Fillup subscription failed!")
+//                    return
+//                }
+//
+//                print("grrr: \(snapshot.documentChanges.map{c in "\(c.document.documentID) \(c.oldIndex)=>\(c.newIndex) \(c.type)"})")
+//            }
+        }
+    }
     
     init(id: UUID, name: String) {
         self.id = id
@@ -54,12 +93,12 @@ class Car: ObservableObject, Identifiable {
         
         let testCar = Car(id: UUID(), name: "VW Up!")
         testCar.fillups.append(contentsOf: [
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 12500, volume: 32.1, literPrice: 10.59),
-            Fillup(id: UUID(), date: formatter.date(from: "24/01-2021")!, odometer: 12760, volume: 14.6, literPrice: 10.14),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13005, volume: 12.2, literPrice: 10.32),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13666, volume: 22.1, literPrice: 11.02),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13989, volume: 54.6, literPrice: 9.59),
-            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 14444, volume: 7.6, literPrice: 10.08),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 12500, volume: 32.1, price: 10.59),
+            Fillup(id: UUID(), date: formatter.date(from: "24/01-2021")!, odometer: 12760, volume: 14.6, price: 10.14),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13005, volume: 12.2, price: 10.32),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13666, volume: 22.1, price: 11.02),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 13989, volume: 54.6, price: 9.59),
+            Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 14444, volume: 7.6, price: 10.08),
         ])
         return testCar
     }()

@@ -16,6 +16,8 @@ class AppManager: ObservableObject {
     @Published
     var user: User?
     
+    private var subscription: ListenerRegistration?
+    
     func initForReal() {
         FirebaseApp.configure()
         
@@ -24,13 +26,12 @@ class AppManager: ObservableObject {
         Auth.auth().signIn { (user) in
             self.user = user
             
-            guard let user = user else { return }
+//            guard let user = user else { return }
+//            db.getCars(for: user) { cars in
+//                self.cars = cars
+//            }
             
-            db.getCars(for: user) { (cars) in
-                print(cars)
-                
-                self.cars = cars
-            }
+            self.subscription = self.subscribe(database: db)
         }
     }
     
