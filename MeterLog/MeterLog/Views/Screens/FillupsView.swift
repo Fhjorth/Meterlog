@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct FillupsView: View {
-    
-    
     @ObservedObject var car: Car
     
     var body: some View {

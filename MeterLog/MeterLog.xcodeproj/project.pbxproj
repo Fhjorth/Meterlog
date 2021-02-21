@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CF225E03A0E00B3C5A8 /* CarManager.swift */; };
+		2F822CF325E03A0E00B3C5A8 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CF225E03A0E00B3C5A8 /* AppManager.swift */; };
 		2F822CFD25E03F7C00B3C5A8 /* FillupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */; };
 		2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0425E0455400B3C5A8 /* CarDetailView.swift */; };
 		2F822D0A25E0491E00B3C5A8 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F822D0925E0491E00B3C5A8 /* GraphView.swift */; };
@@ -24,6 +24,12 @@
 		B368CFF425E147E600C2DFBC /* GarageViewListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B368CFF325E147E600C2DFBC /* GarageViewListItemView.swift */; };
 		C5657CE525E18AA80011CEFF /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657CE425E18AA80011CEFF /* BottomSheet.swift */; };
 		C5657CEA25E18E820011CEFF /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657CE925E18E820011CEFF /* RoundedCorners.swift */; };
+		C5657CF525E1AD1C0011CEFF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C5657CF425E1AD1C0011CEFF /* FirebaseAuth */; };
+		C5657CF725E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C5657CF625E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta */; };
+		C5657CFF25E277770011CEFF /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657CFE25E277770011CEFF /* Car.swift */; };
+		C5657D0425E277950011CEFF /* Fillup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657D0325E277950011CEFF /* Fillup.swift */; };
+		C5657D0925E277D60011CEFF /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5657D0825E277D60011CEFF /* Database.swift */; };
+		C5657D1B25E27A1F0011CEFF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C5657D1A25E27A1F0011CEFF /* GoogleService-Info.plist */; };
 		C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */; };
 		C5E8C05D25E13F6400E60D5E /* TempFillup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E8C05C25E13F6400E60D5E /* TempFillup.swift */; };
 /* End PBXBuildFile section */
@@ -46,7 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F822CF225E03A0E00B3C5A8 /* CarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarManager.swift; sourceTree = "<group>"; };
+		2F822CF225E03A0E00B3C5A8 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		2F822CFC25E03F7C00B3C5A8 /* FillupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillupsView.swift; sourceTree = "<group>"; };
 		2F822D0425E0455400B3C5A8 /* CarDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarDetailView.swift; sourceTree = "<group>"; };
 		2F822D0925E0491E00B3C5A8 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -68,6 +74,10 @@
 		B368CFF325E147E600C2DFBC /* GarageViewListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GarageViewListItemView.swift; sourceTree = "<group>"; };
 		C5657CE425E18AA80011CEFF /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		C5657CE925E18E820011CEFF /* RoundedCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorners.swift; sourceTree = "<group>"; };
+		C5657CFE25E277770011CEFF /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		C5657D0325E277950011CEFF /* Fillup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fillup.swift; sourceTree = "<group>"; };
+		C5657D0825E277D60011CEFF /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		C5657D1A25E27A1F0011CEFF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C59DBF9D25E10BB600B3E368 /* AwesomeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeInput.swift; sourceTree = "<group>"; };
 		C5E8C05C25E13F6400E60D5E /* TempFillup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempFillup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,7 +87,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5657CF725E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				2F822D2625E138E500B3C5A8 /* SwiftUICharts in Frameworks */,
+				C5657CF525E1AD1C0011CEFF /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +113,10 @@
 		2F822CF125E039E900B3C5A8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				2F822CF225E03A0E00B3C5A8 /* CarManager.swift */,
+				2F822CF225E03A0E00B3C5A8 /* AppManager.swift */,
+				C5657CFE25E277770011CEFF /* Car.swift */,
+				C5657D0325E277950011CEFF /* Fillup.swift */,
+				C5657D0825E277D60011CEFF /* Database.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -153,6 +168,7 @@
 		2FA0B59825E03867005E700D /* MeterLog */ = {
 			isa = PBXGroup;
 			children = (
+				C5657D1A25E27A1F0011CEFF /* GoogleService-Info.plist */,
 				C5E8C05B25E13F5400E60D5E /* Data */,
 				2F822CFA25E03F4C00B3C5A8 /* Views */,
 				2F822CF125E039E900B3C5A8 /* Managers */,
@@ -234,6 +250,8 @@
 			name = MeterLog;
 			packageProductDependencies = (
 				2F822D2525E138E500B3C5A8 /* SwiftUICharts */,
+				C5657CF425E1AD1C0011CEFF /* FirebaseAuth */,
+				C5657CF625E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta */,
 			);
 			productName = MeterLog;
 			productReference = 2FA0B59625E03867005E700D /* MeterLog.app */;
@@ -308,6 +326,7 @@
 			mainGroup = 2FA0B58D25E03867005E700D;
 			packageReferences = (
 				2F822D2425E138E500B3C5A8 /* XCRemoteSwiftPackageReference "ChartView" */,
+				C5657CF325E1AD1C0011CEFF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 2FA0B59725E03867005E700D /* Products */;
 			projectDirPath = "";
@@ -326,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA0B5A125E0386A005E700D /* Preview Assets.xcassets in Resources */,
+				C5657D1B25E27A1F0011CEFF /* GoogleService-Info.plist in Resources */,
 				2FA0B59E25E0386A005E700D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +372,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FA0B5CA25E0391B005E700D /* GarageView.swift in Sources */,
-				2F822CF325E03A0E00B3C5A8 /* CarManager.swift in Sources */,
+				2F822CF325E03A0E00B3C5A8 /* AppManager.swift in Sources */,
+				C5657CFF25E277770011CEFF /* Car.swift in Sources */,
+				C5657D0425E277950011CEFF /* Fillup.swift in Sources */,
 				C5657CE525E18AA80011CEFF /* BottomSheet.swift in Sources */,
 				2F822D1825E049D500B3C5A8 /* FillupView.swift in Sources */,
 				B368CFF425E147E600C2DFBC /* GarageViewListItemView.swift in Sources */,
@@ -362,6 +384,7 @@
 				2F822D0525E0455400B3C5A8 /* CarDetailView.swift in Sources */,
 				2F822D2025E1327D00B3C5A8 /* GraphContainer.swift in Sources */,
 				C5657CEA25E18E820011CEFF /* RoundedCorners.swift in Sources */,
+				C5657D0925E277D60011CEFF /* Database.swift in Sources */,
 				2FA0B59A25E03867005E700D /* MeterLogApp.swift in Sources */,
 				C59DBF9E25E10BB600B3E368 /* AwesomeInput.swift in Sources */,
 				2F822D0A25E0491E00B3C5A8 /* GraphView.swift in Sources */,
@@ -688,6 +711,14 @@
 				minimumVersion = 1.5.4;
 			};
 		};
+		C5657CF325E1AD1C0011CEFF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -695,6 +726,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2F822D2425E138E500B3C5A8 /* XCRemoteSwiftPackageReference "ChartView" */;
 			productName = SwiftUICharts;
+		};
+		C5657CF425E1AD1C0011CEFF /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C5657CF325E1AD1C0011CEFF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C5657CF625E1AD1C0011CEFF /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C5657CF325E1AD1C0011CEFF /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,26 +1,11 @@
 //
-//  CarManager.swift
+//  Car.swift
 //  MeterLog
 //
-//  Created by Frederik Hjorth on 19/02/2021.
+//  Created by Henrik Top Mygind on 21/02/2021.
 //
 
 import Foundation
-
-// TODO MOve to model/separate files?!
-struct Fillup: Identifiable {
-    var id: UUID
-    var date: Date
-    var odometer: Int
-    var volume: Float
-    var literPrice: Float
-    
-    static func createFrom(date: Date, odometer: Int, volume: Float, price: Float, id: UUID? = nil) -> Fillup {
-        let id = id ?? UUID()
-        
-        return Fillup(id: id, date: date, odometer: odometer, volume: volume, literPrice: price)
-    }
-}
 
 class Car: ObservableObject, Identifiable {
     var id: UUID
@@ -83,25 +68,5 @@ class Car: ObservableObject, Identifiable {
             Fillup(id: UUID(), date: formatter.date(from: "17/01-2021")!, odometer: 14444, volume: 7.6, literPrice: 10.08),
         ])
         return testCar
-    }()
-}
-
-class CarManager: ObservableObject {
-    
-    @Published
-    var cars = [Car]()
-    
-    func initForReal() {
-        // todo load from firebase
-    }
-    
-    func initForTest() {
-        cars = [Car.carForTest]
-    }
-    
-    static var carManagerForTest: CarManager = {
-        let carManager = CarManager()
-        carManager.initForTest()
-        return carManager
     }()
 }
