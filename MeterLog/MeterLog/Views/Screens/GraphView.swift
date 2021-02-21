@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
+import SwiftUICharts
 
 struct GraphView: View {
     
     var car: Car
+   
     
     var body: some View {
         VStack {
-            GraphContainer(car: Car.carForTest)
+
+            GraphContainer(car: car)
                 .frame(height: 400)
             
             Spacer()
@@ -21,8 +24,8 @@ struct GraphView: View {
             VStack{
                 List{
                     Text("Car model: \(car.name)")
-                    Text("Total Fulls: \(car.fillups.count)")
-                    Text("Hej")
+                    Text("Total Fuel price: ")
+                    Text("Best ride: ")
                 }
             }
         }
